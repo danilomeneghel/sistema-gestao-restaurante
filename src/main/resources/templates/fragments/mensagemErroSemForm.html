@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Layout</title>
+</head>
+
+<body>
+<div th:fragment="mensagem">
+    <div class="alert alert-danger" th:if="${customMessage}">
+        <span th:text="${customMessage}"></span>
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+</div>
+</body>
+</html>

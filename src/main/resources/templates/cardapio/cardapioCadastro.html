@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Cadastro de Cardápio</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Novo Cardápio</h3>
+    <a class="btn btn-default voltar" th:href="@{/classificador/quartos}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/classificador/quarto/cadastrar}" method="post" th:object="${quarto}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+
+        <div class="form-item" th:classappend="${#fields.hasErrors('quantidade')}? is-invalid">
+            <label for="quantidade">Quantidade de Quartos</label>
+            <input class="form-control" id="quantidade" th:field="*{quantidade}"
+                   placeholder="Digite a quantidade de quarto" required>
+        </div>
+
+        <div class="form-item" th:classappend="${#fields.hasErrors('descricao')}? is-invalid">
+            <label for="descricao">Descrição dos Quartos</label>
+            <input class="form-control" id="descricao" th:field="*{descricao}"
+                   placeholder="Digite a Descrição dos Quartos" required>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+</body>
+</html>

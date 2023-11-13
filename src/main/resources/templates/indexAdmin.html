@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<body>
+<section layout:fragment="content" class="margin-card">
+    <div class="row">
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/classificador/categorias}">
+                    <i class="fas fa-folder-open fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/classificador/categorias}">CATEGORIAS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/classificador/produtos}">
+                    <i class="fas fa-beer fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/classificador/produtos}">PRODUTOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/cardapio/todos}">
+                    <i class="fas fa-newspaper fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/cardapio/todos}"> CARDÁPIOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/pedido/todos}">
+                    <i class="fas fa-edit fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/pedido/todos}"> PEDIDOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/pedido/pedidos-confirmados}" target="_blank">
+                    <i class="fas fa-edit fa-fw fa-4x padding-y-3xs" style="font-weight: 100 !important"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/pedido/pedidos-confirmados}" target="_blank"> PEDIDOS DISPONÍVEIS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/localidade/estados}">
+                    <i class="fas fa-map fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/localidade/estados}">ESTADOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/localidade/municipios}">
+                    <i class="fas fa-map-signs fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/localidade/municipios}">MUNICÍPIOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/localidade/bairros}">
+                    <i class="fas fa-map-pin fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/localidade/bairros}">BAIRROS ></a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

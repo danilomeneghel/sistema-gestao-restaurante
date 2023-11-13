@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layoutUsuario.html}">
+<head>
+    <title>Visualização de Imóvel</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Visualização de Imóvel</h3>
+    <a class="btn btn-default voltar" th:href="@{/pedido/home/restaurante-usuario}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <div class="margem-visualizar">
+        <div class="row">
+            <div class="col-3">
+                <b>Categoria: </b>
+                <span th:text="${pedido.categoria.nome}"></span>
+            </div>
+            <div class="col-3">
+                <b>Negócio: </b>
+                <span th:text="${pedido.produto.nome}"></span>
+            </div>
+            <div class="col-6">
+                <b>Quarto: </b>
+                <span th:text="${pedido.quarto.descricao}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <b>Estado: </b>
+                <span th:text="${pedido.bairro.municipio.estado.nome}"></span>
+            </div>
+            <div class="col-3">
+                <b>Município: </b>
+                <span th:text="${pedido.bairro.municipio.nome}"></span>
+            </div>
+            <div class="col-6">
+                <b>Bairro: </b>
+                <span th:text="${pedido.bairro.nome}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <b>Valor: </b>
+                <span th:text="${'R$ ' + pedido.valor}"></span>
+            </div>
+            <div class="col-3">
+                <b>Status: </b>
+                <span th:text="${pedido.ativo} ? 'Ativo' : 'Inativo'"></span>
+            </div>
+            <div class="col-6"></div>
+        </div>
+        <br>
+        <div class="row">
+            <h4>Fotos:</h4>
+        </div>
+        <div class="row" th:unless="${pedido.imagens.size>0}">
+            <span>Sem fotos</span>
+        </div>
+        <div class="row" th:if="${pedido.imagens.size>0}">
+            <div class="card col-3" th:each="imagem:${pedido.imagens}">
+                <a th:href="@{${'/imagem/'+imagem.file}}" target="_blank">
+                    <img class="card-img-pedido" th:src="@{${'/imagem/'+imagem.file}}">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

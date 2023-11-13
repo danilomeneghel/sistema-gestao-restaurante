@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Edição de Categoria</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Editar Categoria</h3>
+    <a class="btn btn-default voltar" th:href="@{/classificador/categorias}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/classificador/categoria/editar}" method="post" th:object="${categoria}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+
+        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Categoria</label>
+            <input class="form-control" id="nome" th:field="*{nome}"
+                   placeholder="Digite o nome da Categoria" required>
+        </div>
+        <input type="hidden" th:field="*{id}">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+</body>
+</html>

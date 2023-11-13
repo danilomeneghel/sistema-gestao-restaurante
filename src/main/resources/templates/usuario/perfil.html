@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Perfil</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Perfil</h3>
+    <a class="btn btn-default voltar" th:href="@{/}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <div class="margem-visualizar">
+        <div class="row">
+            <div class="col-4">
+                <b>Nome: </b>
+                <span th:text="${usuario.name}"></span>
+            </div>
+            <div class="col-4">
+                <b>E-mail: </b>
+                <span th:text="${usuario.email}"></span>
+            </div>
+            <div class="col-4">
+                <b>Usuário: </b>
+                <span th:text="${usuario.username}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <b>Função: </b>
+                <span th:text="${usuario.roles} == 'ROLE_ADMIN' ? 'Administrador' : 'Usuário'"></span>
+            </div>
+            <div class="col-4">
+                <b>Status: </b>
+                <span th:text="${usuario.active} ? 'Ativo' : 'Inativo'"></span>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

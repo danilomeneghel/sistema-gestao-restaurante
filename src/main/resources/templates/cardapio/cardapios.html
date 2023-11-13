@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Cardápios</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="titulo">Cardápios</h3>
+
+    <div th:replace="fragments/mensagemSucesso"></div>
+    <div th:replace="fragments/mensagemErroSemForm"></div>
+
+    <table id="data-table" class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-2">Id</th>
+            <th class="col-3">Nome</th>
+            <th class="col-3"></th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</section>
+<th:block layout:fragment="script">
+    <script src="/js/quarto.js"></script>
+</th:block>
+</body>
+</html>

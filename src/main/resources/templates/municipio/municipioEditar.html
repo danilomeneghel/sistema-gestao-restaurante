@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Edição de Município</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Editar Município</h3>
+    <a class="btn btn-default voltar" th:href="@{/localidade/municipios}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/localidade/municipio/editar}" method="post" th:object="${municipio}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+
+        <div class="form-item" th:classappend="${customMessage}? is-invalid">
+            <label for="estado-select">Nome do Estado</label>
+            <select id="estado-select" th:field="*{estado.id}" class="form-control">
+                <option value="" selected>Escolha o nome do Estado</option>
+                <option th:each="est:${estados}" th:value="${est.id}" th:text="${est.nome}">
+            </select>
+        </div>
+
+        <div id="municipio-div" class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Nome do Município</label>
+            <input class="form-control" id="nome" th:field="*{nome}"
+                   placeholder="Digite o nome do município">
+        </div>
+        <input type="hidden" th:field="*{id}">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+</body>
+</html>

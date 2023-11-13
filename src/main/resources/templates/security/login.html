@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layoutLogin.html}">
+<body>
+<section layout:fragment="content">
+    <div class="col-login-form">
+        <div id="container-login">
+            <div class="logo-login text-center">
+                <img src="images/logo.png" height="125px">
+            </div>
+
+            <div class="alert alert-danger" th:if="${param.error}">
+                <div>Usuário ou senha inválido</div>
+            </div>
+            <div class="alert alert-success" th:if="${param.logout}">
+                <div>Sua conta foi desconectada</div>
+            </div>
+            <div class="alert alert-success" th:if="${param.success}">
+                <div>Conta criada com sucesso</div>
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-item">
+                    <input class="form-control" placeholder="Usuário" type="text" name="username" autofocus required/>
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="form-item">
+                    <input class="form-control" placeholder="Senha" type="password" name="password" required/>
+                    <i class="fa fa-lock"></i>
+                </div>
+                <div class="form-item">
+                    <input class="btn btn-primary form-control" type="submit" value="Entrar"/>
+                </div>
+                <div class="text-center"><a th:href="@{/signup}">Criar conta</a></div>
+            </form>
+        </div>
+        <div class="text-version">Versão 2.0.1</div>
+    </div>
+    <div class="col-login-image">&nbsp;</div>
+</section>
+</body>
+</html>

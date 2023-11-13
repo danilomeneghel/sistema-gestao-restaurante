@@ -1,0 +1,24 @@
+package restaurante.entity;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
+
+@Entity
+@Table(name = "cardapio")
+@Data
+public class CardapioEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "O nome do cardápio não pode estar em branco.")
+    private String nome;
+
+    @OneToMany(mappedBy = "cardapio", cascade = CascadeType.REMOVE)
+    private List<CardapioItemEntity> cardapioItems;
+
+}

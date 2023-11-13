@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layoutUsuario.html}">
+<body>
+<section layout:fragment="content" class="margin-card-pedido">
+    <div class="row">
+        <div class="col-6"><h4>Pedidos Confirmados</h4></div>
+        <div class="col-6 text-right">
+            Filtrar Categoria <select id="filtrar-pedido">
+            <option value="0" selected>Todas</option>
+            <option th:selected="${cat.id==idCategoria}" th:each="cat:${categorias}" th:value="${cat.id}"
+                    th:text="${cat.nome}">
+        </select>
+        </div>
+    </div>
+    <div id="pedidos" class="row">
+        <div class="card-pedido col-card-pedido bg-card" th:each="pedido:${pedido}">
+            <span th:unless="${pedido.imagens.size>0}">
+                <img class="card-img-pedido-home" th:src="@{/images/pedido.png}" alt="Pedidos">
+            </span>
+            <a th:if="${pedido.imagens.size>0}" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
+                <img class="card-img-pedido-home" th:src="@{${'/imagem/'+pedido.imagens[0].file}}">
+            </a>
+            <div class="card-pedido-text text-white">
+                <h5 th:text="${pedido.produto.nome+' ('+pedido.categoria.nome+')'}"></h5>
+                <p th:text="${pedido.bairro.municipio.nome+'/'+pedido.bairro.municipio.estado.uf}"></p>
+                <p th:inline="text">R$ [[${#numbers.formatDecimal(pedido.valor, 0, 'COMMA', 2, 'POINT')}]]</p>
+                <a class="text-white" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
+                    Mais detalhes ></a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

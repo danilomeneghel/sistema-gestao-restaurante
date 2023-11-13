@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Edição de Estado</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Editar Estado</h3>
+    <a class="btn btn-default voltar" th:href="@{/localidade/estados}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/localidade/estado/editar}" method="post" th:object="${estado}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+
+        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Estado</label>
+            <input class="form-control" id="nome" th:field="*{nome}"
+                   placeholder="Digite o nome do Estado" required>
+        </div>
+        <div class="form-item" th:classappend="${#fields.hasErrors('uf')}? is-invalid">
+            <label for="uf">UF</label>
+            <input class="form-control" id="uf" th:field="*{uf}"
+                   placeholder="Digite a sigla da UF" required>
+        </div>
+        <input type="hidden" th:field="*{id}">
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+</body>
+</html>

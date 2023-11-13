@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Layout</title>
+</head>
+
+<body>
+<div th:fragment="mensagem">
+    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()} or ${customMessage}">
+        <div th:each="ms:${customMessage}">
+            <span th:text="${ms}"></span>
+        </div>
+        <div th:each="erro:${#fields.detailedErrors()}">
+            <span th:text="${erro.message}"></span>
+        </div>
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/fontawesome.min.css" rel="stylesheet"/>
+    <link href="/css/datatables.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/estado-municipio.js"></script>
+    <script src="/js/scripts.js"></script>
+
+    <title>Gestão de Restaurante</title>
+</head>
+
+<body>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-menu border-right text-white" id="sidebar-wrapper">
+        <div class="sidebar-heading text-dark"></div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action bg-menu text-white" th:href="@{/}">
+                <i class="fas fa-home"></i> Home</a>
+            <a class="list-group-item list-group-item-action bg-menu text-white"
+               th:href="@{/classificador/categorias}">
+                <i class="fas fa-folder-open"></i> Categorias</a>
+            <a class="list-group-item list-group-item-action bg-menu text-white"
+               th:href="@{/classificador/produtos}">
+                <i class="fas fa-beer"></i> Produtos</a>
+            <div class="dropright show">
+                <a href="#" class="list-group-item list-group-item-action bg-menu text-white dropdown-toggle"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-map-marker"></i> Localização</a>
+                <div class="dropdown-menu bg-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item text-white bg-menu" th:href="@{/localidade/estados}">Estados</a>
+                    <a class="dropdown-item text-white bg-menu" th:href="@{/localidade/municipios}">Municípios</a>
+                    <a class="dropdown-item text-white bg-menu" th:href="@{/localidade/bairros}">Bairros</a>
+                </div>
+            </div>
+            <a class="list-group-item list-group-item-action bg-menu text-white"
+               th:href="@{/cardapio/todos}">
+                <i class="fas fa-newspaper"></i> Cardápios</a>
+            <a class="list-group-item list-group-item-action bg-menu text-white" th:href="@{/pedido/todos}">
+                <i class="fas fa-edit"></i> Pedidos</a>
+            <a class="list-group-item list-group-item-action bg-menu text-white"
+               th:href="@{/pedido/pedidos-confirmados}"
+               target="_blank"><i class="fas fa-edit" style="font-weight: 100 !important"></i> Pedidos
+                Confirmados</a>
+            <a class="list-group-item list-group-item-action bg-menu text-white"
+               th:href="@{/usuario/todos}"><i class="fas fa-users"></i> Usuários</a>
+            <a class="list-group-item list-group-item-action bg-menu text-white" th:href="@{/swagger-ui.html}"
+               target="_blank"><i class="fas fa-window-restore"></i> Acessar API</a>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div>
+                <button class="btn" id="menu-toggle" onclick="toggle()">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h4>Gestão de Restaurante</h4>
+            </div>
+            <div class="navbar-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img th:src="@{/images/avatar-placeholder.svg}" alt="" width="30" class="img-circle">
+                    <span th:text="${#authentication.getPrincipal().getName()}"></span> <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-logout">
+                    <a class="dropdown-item" th:href="@{'/perfil/usuario/'+${#authentication.getPrincipal().getUsername()}}">Perfil</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Sair</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <section layout:fragment="content">
+                <p>Página não encontrada</p>
+            </section>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<script src="/js/datatables.min.js"></script>
+<th:block layout:fragment="script"/>
+</body>
+</html>

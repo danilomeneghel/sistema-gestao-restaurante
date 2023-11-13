@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Cadastro de Bairro</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h1 th:if="${#lists.isEmpty(estados)}" class="is-invalid">Não é possível cadastrar bairro sem um Estado</h1>
+    <h1 th:if="${#lists.isEmpty(municipios)}" class="is-invalid">Não é possível cadastrar bairro sem um Municipio</h1>
+
+    <h3 class="inline">Novo Bairro</h3>
+    <a class="btn btn-default voltar" th:href="@{/localidade/bairros}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <div th:unless="${#lists.isEmpty(estados)} and ${#lists.isEmpty(municipios)}">
+        <form th:action="@{/localidade/bairro/cadastrar}" method="post" th:object="${bairro}">
+            <div th:replace="fragments/mensagemErro"></div>
+            <div th:replace="fragments/mensagemSucesso"></div>
+
+            <div class="form-item" th:classappend="${estado_ok}? is-invalid">
+                <label for="estado-select">Nome do Estado</label>
+                <select id="estado-select" class="form-control" name="idEstado" required>
+                    <option value="" selected>Escolha o nome do Estado</option>
+                    <option th:each="est:${estados}" th:value="${est.id}" th:text="${est.nome}">
+                </select>
+            </div>
+            <div class="form-item" id="municipio-div" style="display:none" th:classappend="${municipio_ok}? is-invalid">
+                <label for="municipio-select">Nome do Município</label>
+                <select id="municipio-select" th:field="*{municipio.id}" class="form-control" required>
+                    <option value="" selected>Escolha o nome do Município</option>
+                    <option th:each="mun:${municipios}" th:value="${mun.id}" th:text="${mun.nome}">
+                </select>
+            </div>
+            <div class="form-item" id="bairro-div" style="display:none"
+                 th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+                <label for="nome">Nome do Bairro</label>
+                <input class="form-control" id="nome" th:field="*{nome}"
+                       placeholder="Digite o nome do Bairro" required>
+            </div>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Salvar
+            </button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

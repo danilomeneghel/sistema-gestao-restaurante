@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Cadastro de Produto</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Novo Produto</h3>
+    <a class="btn btn-default voltar" th:href="@{/classificador/produtos}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/classificador/produto/cadastrar}" method="post" th:object="${produto}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+
+        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Negócio</label>
+            <input class="form-control" id="nome" th:field="*{nome}"
+                   placeholder="Digite o nome do Negócio" required>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+</body>
+</html>

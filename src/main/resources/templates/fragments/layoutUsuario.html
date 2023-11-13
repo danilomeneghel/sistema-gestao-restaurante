@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/fontawesome.min.css" rel="stylesheet"/>
+    <link href="/css/datatables.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/scripts.js"></script>
+
+    <title>Gestão de Restaraunte</title>
+</head>
+
+<body>
+<div class="d-flex" id="wrapper">
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="navbar-margin-left">
+                <h4>Gestão de Restaraunte</h4>
+            </div>
+            <div class="navbar-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img th:src="@{/images/avatar-placeholder.svg}" alt="" width="30" class="img-circle">
+                    <span th:text="${#authentication.getPrincipal().getName()}"></span> <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-logout">
+                    <a class="dropdown-item" th:href="@{'/perfil/usuario/'+${#authentication.getPrincipal().getUsername()}}">Perfil</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Sair</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <section layout:fragment="content">
+                <p>Página não encontrada</p>
+            </section>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+</body>
+</html>
