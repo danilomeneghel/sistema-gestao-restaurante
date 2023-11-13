@@ -8,7 +8,7 @@ $(document).ready(function () {
                 titleAttr: 'Adicionar',
                 className: 'btn btn-success buttons-add',
                 action: function (e, dt, node, config) {
-                    window.location.href = '/cardapio-item/cadastro';
+                    window.location.href = '/cardapio/cardapio-item/cadastro';
                 }
             },
             {
@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         ],
         ajax: {
-            url: '/api/cardapio-item/todos',
+            url: '/api/cardapio/cardapio-item/todos',
             type: 'GET',
             datatype: 'json',
             dataSrc: ''
@@ -68,10 +68,10 @@ $(document).ready(function () {
             { "data": "preco" },
             {
                 "data": null, "render": function (data) {
-                    return '<div class="actions"><a class="btn btn-primary" href="/cardapio-item/editar/'+data.id+'">'+
+                    return '<div class="actions"><a class="btn btn-primary" href="/cardapio/cardapio-item/editar/'+data.id+'">'+
                     '<i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger" '+
                     'onclick="return confirm(\'Tem certeza que deseja excluir esse registro?\');" '+
-                    'href="/cardapio-item/excluir/'+data.id+'"><i class="fas fa-trash"></i> Excluir</a></div>'
+                    'href="/cardapio/cardapio-item/excluir/'+data.id+'"><i class="fas fa-trash"></i> Excluir</a></div>'
                 }
             }
         ],

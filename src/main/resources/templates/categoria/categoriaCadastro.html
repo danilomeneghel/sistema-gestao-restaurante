@@ -9,10 +9,10 @@
 <body>
 <section layout:fragment="content" class="margem">
     <h3 class="inline">Nova Categoria</h3>
-    <a class="btn btn-default voltar" th:href="@{/classificador/categorias}">
+    <a class="btn btn-default voltar" th:href="@{/categorias}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <form th:action="@{/classificador/categoria/cadastrar}" method="post" th:object="${categoria}">
+    <form th:action="@{/categoria/cadastrar}" method="post" th:object="${categoria}">
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
         <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">

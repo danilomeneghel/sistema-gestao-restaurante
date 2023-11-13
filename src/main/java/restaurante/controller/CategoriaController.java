@@ -73,7 +73,7 @@ public class CategoriaController {
         } else {
             ra.addFlashAttribute("erro", "A Categoria não foi encontrada.");
         }
-        return new ModelAndView("redirect:/classificador/categorias");
+        return new ModelAndView("redirect:/categoria/categorias");
     }
 
 }

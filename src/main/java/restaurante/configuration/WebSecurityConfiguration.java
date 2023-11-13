@@ -24,9 +24,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/localidade/**", "/classificador/**", "/usuario/**",
-                        "/api/localidade/**", "/api/classificador/**", "/api/usuario/**", "/api/pedido/**", "/swagger-ui/**").hasRole("ADMIN")
-                .antMatchers("/", "/pedido/**", "/perfil", "/api/pedido-usuario/**", "/imagem/**", "/ajax/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/localidade/**", "/categoria/**", "/cardapio/**", "/usuario/**",
+                        "/api/localidade/**", "/api/categoria/**", "/api/cardapio/**", "/api/usuario/**",
+                        "/api/pedido/**", "/swagger-ui/**").hasRole("ADMIN")
+                .antMatchers("/", "/pedido/**", "/perfil", "/api/pedido-usuario/**", "/imagem/**",
+                        "/ajax/**").hasAnyRole("USER", "ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout()
                 .logoutUrl("/logout")

@@ -140,7 +140,7 @@ public class PedidoController {
         } else {
             ra.addFlashAttribute("erro", "O Pedido não foi encontrado.");
         }
-        return new ModelAndView("redirect:/pedido/todos");
+        return new ModelAndView("redirect:/pedido/pedidos");
     }
 
     @GetMapping("/visualizar/pedido-usuario/{id}")

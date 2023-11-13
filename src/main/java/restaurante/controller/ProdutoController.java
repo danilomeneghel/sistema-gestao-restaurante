@@ -83,7 +83,7 @@ public class ProdutoController {
         } else {
             ra.addFlashAttribute("erro", "O Produto não foi encontrado.");
         }
-        return new ModelAndView("redirect:/classificador/produtos");
+        return new ModelAndView("redirect:/produto/produtos");
     }
 
 }
