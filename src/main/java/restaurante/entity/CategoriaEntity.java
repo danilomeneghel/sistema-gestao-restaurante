@@ -18,7 +18,7 @@ public class CategoriaEntity {
     private String nome;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cardapio_item")
+    @JoinColumn(name = "id_cardapio_item", nullable = false)
     private CardapioItemEntity cardapioItem;
 
 }

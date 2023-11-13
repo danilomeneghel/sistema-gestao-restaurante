@@ -13,6 +13,7 @@ import restaurante.entity.PedidoEntity;
 import restaurante.exception.FileStorageException;
 import restaurante.model.Imagem;
 import restaurante.model.Pedido;
+import restaurante.model.Produto;
 import restaurante.repository.ImagemRepository;
 import restaurante.repository.PedidoRepository;
 
@@ -63,8 +64,8 @@ public class ImagemService {
                     imagem.setFile(novoNomeArquivo.toString());
                     imagem.setPath(DIR_IMAGE);
                     Optional<PedidoEntity> imovelEntity = pedidoRepository.findById(idImovel);
-                    Pedido pedido = modelMapper.map(imovelEntity.get(), Pedido.class);
-                    imagem.setPedido(pedido);
+                    Produto produto = modelMapper.map(imovelEntity.get(), Produto.class);
+                    imagem.setProduto(produto);
                     Imagem imagemSalva = this.salvarImagem(imagem);
                     if (imagemSalva == null) {
                         throw new FileStorageException("Erro ao salvar imagem " + nomeArquivo + ". Por favor, tente novamente.");
