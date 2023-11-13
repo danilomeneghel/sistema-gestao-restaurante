@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import restaurante.entity.CardapioItemEntity;
+import restaurante.entity.CategoriaEntity;
 import restaurante.model.CardapioItem;
+import restaurante.model.Categoria;
 import restaurante.repository.CardapioItemRepository;
 
 import java.util.List;
@@ -28,6 +30,15 @@ public class CardapioItemService {
         Optional<CardapioItemEntity> cardapioItemEntity = cardapioItemRepository.findById(id);
         if (!cardapioItemEntity.isEmpty()) {
             return modelMapper.map(cardapioItemEntity.get(), CardapioItem.class);
+        }
+        return null;
+    }
+
+    public List<CardapioItem> findCardapioItemByCategoria(Categoria categoria) {
+        CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
+        List<CardapioItemEntity> cardapioItems = cardapioItemRepository.findByCategorias(categoriaEntity);
+        if (!cardapioItems.isEmpty()) {
+            cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
         }
         return null;
     }

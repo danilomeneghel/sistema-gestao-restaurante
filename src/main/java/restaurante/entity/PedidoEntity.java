@@ -19,7 +19,7 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "cardapio", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE)
     private List<CardapioItemEntity> cardapioItems;
 
     private String observacao;

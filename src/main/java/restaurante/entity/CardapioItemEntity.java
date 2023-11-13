@@ -26,15 +26,19 @@ public class CardapioItemEntity {
     @NotBlank(message = "O nome do item do cardápio não pode estar em branco.")
     private String nome;
 
-    @OneToMany(mappedBy = "cardapio_item", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
     private List<CategoriaEntity> categorias;
 
-    @OneToMany(mappedBy = "cardapio_item", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
     private List<ProdutoEntity> produtos;
 
     @NotNull(message = "O preço do item do cardápio não pode estar em branco.")
     @DecimalMin(value = "0.01", message = "O preço não pode ser R$0.00 ou negativo.")
     @DecimalMax(value = "99999999.99", message = "O preço não pode ser maior que R$10000000.00")
     private BigDecimal preco;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pedido")
+    private PedidoEntity pedido;
 
 }

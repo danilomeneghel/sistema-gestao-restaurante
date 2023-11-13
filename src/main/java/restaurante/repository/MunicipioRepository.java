@@ -12,6 +12,6 @@ public interface MunicipioRepository extends JpaRepository<MunicipioEntity, Long
 
     List<MunicipioEntity> findByNomeContainingIgnoreCase(String nome);
 
-    List<MunicipioEntity> findByEstado(EstadoEntity estado);
+    List<MunicipioEntity> findByEstado(EstadoEntity estadoEntity);
 
 }

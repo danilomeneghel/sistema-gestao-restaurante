@@ -9,14 +9,8 @@ public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 
     List<PedidoEntity> findByStatusTrue();
 
-    List<PedidoEntity> findByStatusTrueAndCategoria(CategoriaEntity categoriaEntity);
+    List<PedidoEntity> findByStatusTrueAndCardapioItems(List<CardapioItemEntity> cardapioItemsEntities);
 
-    List<PedidoEntity> findByCardapio(CardapioEntity cardapioEntity);
-
-    List<PedidoEntity> findByProduto(ProdutoEntity produtoEntity);
-
-    List<PedidoEntity> findByPrato(CardapioItemEntity cardapioItemEntity);
-
-    List<PedidoEntity> findByBairro(BairroEntity bairroEntity);
+    List<PedidoEntity> findByCardapioItemsNome(String cardapioNome);
 
 }

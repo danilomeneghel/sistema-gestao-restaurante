@@ -17,6 +17,9 @@ public class PedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    @Autowired
+    private CardapioItemService cardapioItemService;
+
     private ModelMapper modelMapper = new ModelMapper();
 
     public List<Pedido> findAllPedidos() {
@@ -39,8 +42,9 @@ public class PedidoService {
 
     public List<Pedido> findPedidosByConfirmadoAndCategoria(Categoria categoria) {
         if (categoria.getId() != null) {
-            CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
-            List<PedidoEntity> pedidos = pedidoRepository.findByStatusTrueAndCategoria(categoriaEntity);
+            List<CardapioItem> cardapioItems = cardapioItemService.findCardapioItemByCategoria(categoria);
+            List<CardapioItemEntity> cardapioItemsEntities = cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItemEntity.class)).collect(Collectors.toList());
+            List<PedidoEntity> pedidos = pedidoRepository.findByStatusTrueAndCardapioItems(cardapioItemsEntities);
             if (!pedidos.isEmpty()) {
                 return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
             }
@@ -48,43 +52,10 @@ public class PedidoService {
         return null;
     }
 
-    public List<Pedido> findPedidosByCardapio(Cardapio cardapio) {
-        if (cardapio.getId() != null) {
-            CardapioEntity cardapioEntity = modelMapper.map(cardapio, CardapioEntity.class);
-            List<PedidoEntity> pedidos = pedidoRepository.findByCardapio(cardapioEntity);
-            if (!pedidos.isEmpty()) {
-                return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
-            }
-        }
-        return null;
-    }
-
-    public List<Pedido> findPedidosByProduto(Produto produto) {
-        if (produto.getId() != null) {
-            ProdutoEntity produtoEntity = modelMapper.map(produto, ProdutoEntity.class);
-            List<PedidoEntity> pedidos = pedidoRepository.findByProduto(produtoEntity);
-            if (!pedidos.isEmpty()) {
-                return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
-            }
-        }
-        return null;
-    }
-
-    public List<Pedido> findPedidosByPrato(CardapioItem cardapioItem) {
+    public List<Pedido> findPedidosByCardapioItem(CardapioItem cardapioItem) {
         if (cardapioItem.getId() != null) {
             CardapioItemEntity cardapioItemEntity = modelMapper.map(cardapioItem, CardapioItemEntity.class);
-            List<PedidoEntity> pedidos = pedidoRepository.findByPrato(cardapioItemEntity);
-            if (!pedidos.isEmpty()) {
-                return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
-            }
-        }
-        return null;
-    }
-
-    public List<Pedido> findPedidosByBairro(Bairro bairro) {
-        if (bairro.getId() != null) {
-            BairroEntity bairroEntity = modelMapper.map(bairro, BairroEntity.class);
-            List<PedidoEntity> pedidos = pedidoRepository.findByBairro(bairroEntity);
+            List<PedidoEntity> pedidos = pedidoRepository.findByCardapioItemsNome(cardapioItemEntity.getNome());
             if (!pedidos.isEmpty()) {
                 return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
             }
