@@ -20,7 +20,7 @@ public class ApiPedidoController {
     @Autowired
     private PedidoService pedidoService;
 
-    @GetMapping("/todos")
+    @GetMapping("/pedidos")
     public ResponseEntity<List<Pedido>> mostrarImoveis() {
         return new ResponseEntity<>(pedidoService.findAllPedidos(), HttpStatus.OK);
     }

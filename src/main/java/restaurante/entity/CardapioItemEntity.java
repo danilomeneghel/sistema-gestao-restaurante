@@ -26,8 +26,9 @@ public class CardapioItemEntity {
     @NotBlank(message = "O nome do item do cardápio não pode estar em branco.")
     private String nome;
 
-    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
-    private List<CategoriaEntity> categorias;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria")
+    private CategoriaEntity categoria;
 
     @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
     private List<ProdutoEntity> produtos;

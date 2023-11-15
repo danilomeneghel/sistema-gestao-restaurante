@@ -9,6 +9,6 @@ import java.util.List;
 public interface CardapioItemRepository extends JpaRepository<CardapioItemEntity, Long> {
 
     List<CardapioItemEntity> findByNomeContainingIgnoreCase(String nome);
-    List<CardapioItemEntity> findByCategorias(CategoriaEntity categoriaEntity);
+    List<CardapioItemEntity> findByCategoria(CategoriaEntity categoriaEntity);
 
 }

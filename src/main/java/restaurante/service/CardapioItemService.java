@@ -36,7 +36,7 @@ public class CardapioItemService {
 
     public List<CardapioItem> findCardapioItemByCategoria(Categoria categoria) {
         CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
-        List<CardapioItemEntity> cardapioItems = cardapioItemRepository.findByCategorias(categoriaEntity);
+        List<CardapioItemEntity> cardapioItems = cardapioItemRepository.findByCategoria(categoriaEntity);
         if (!cardapioItems.isEmpty()) {
             cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
         }

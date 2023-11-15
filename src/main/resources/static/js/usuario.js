@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         ],
         ajax: {
-            url: '/api/usuario/todos',
+            url: '/api/usuario/usuarios',
             type: 'GET',
             datatype: 'json',
             dataSrc: ''

@@ -22,7 +22,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/todos")
+    @GetMapping("/usuarios")
     public ModelAndView mostrarUsuarios() {
         ModelAndView mv = new ModelAndView("usuario/usuarios");
         mv.addObject("usuarios", usuarioService.findAllUsuarios());

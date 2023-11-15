@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         ],
         ajax: {
-            url: '/api/categorias',
+            url: '/api/categoria/categorias',
             type: 'GET',
             datatype: 'json',
             dataSrc: ''

@@ -25,7 +25,7 @@ public class CardapioController {
     @Autowired
     private CardapioItemService cardapioItemService;
 
-    @GetMapping("/todos")
+    @GetMapping("/cardapios")
     public ModelAndView mostrarCardapios() {
         ModelAndView mv = new ModelAndView("cardapio/cardapios");
         mv.addObject("cardapios", cardapioService.findAllCardapios());

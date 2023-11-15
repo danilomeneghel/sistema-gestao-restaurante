@@ -20,7 +20,7 @@ public class ApiUsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/todos")
+    @GetMapping("/usuarios")
     public ResponseEntity<List<Usuario>> mostrarUsuarios() {
         return new ResponseEntity<>(usuarioService.findAllUsuarios(), HttpStatus.OK);
     }

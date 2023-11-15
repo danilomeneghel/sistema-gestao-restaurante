@@ -9,7 +9,7 @@
 <body>
 <section layout:fragment="content" class="margem">
     <h3 class="inline">Novo Produto</h3>
-    <a class="btn btn-default voltar" th:href="@{/classificador/produtos}">
+    <a class="btn btn-default voltar" th:href="@{/produto/produtos}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
     <form th:action="@{/classificador/produto/cadastrar}" method="post" th:object="${produto}">

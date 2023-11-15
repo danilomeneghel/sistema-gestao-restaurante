@@ -12,7 +12,6 @@ import restaurante.entity.ImagemEntity;
 import restaurante.entity.PedidoEntity;
 import restaurante.exception.FileStorageException;
 import restaurante.model.Imagem;
-import restaurante.model.Pedido;
 import restaurante.model.Produto;
 import restaurante.repository.ImagemRepository;
 import restaurante.repository.PedidoRepository;

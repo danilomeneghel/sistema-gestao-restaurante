@@ -3,8 +3,11 @@ package restaurante.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import restaurante.entity.*;
-import restaurante.model.*;
+import restaurante.entity.CardapioItemEntity;
+import restaurante.entity.PedidoEntity;
+import restaurante.model.CardapioItem;
+import restaurante.model.Categoria;
+import restaurante.model.Pedido;
 import restaurante.repository.PedidoRepository;
 
 import java.util.List;
@@ -44,7 +47,7 @@ public class PedidoService {
         if (categoria.getId() != null) {
             List<CardapioItem> cardapioItems = cardapioItemService.findCardapioItemByCategoria(categoria);
             List<CardapioItemEntity> cardapioItemsEntities = cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItemEntity.class)).collect(Collectors.toList());
-            List<PedidoEntity> pedidos = pedidoRepository.findByStatusTrueAndCardapioItems(cardapioItemsEntities);
+            List<PedidoEntity> pedidos = pedidoRepository.findByStatusTrueAndCardapioItemsIn(cardapioItemsEntities);
             if (!pedidos.isEmpty()) {
                 return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
             }

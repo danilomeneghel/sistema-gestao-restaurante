@@ -20,7 +20,7 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
-    @GetMapping("/todas")
+    @GetMapping("/categorias")
     public ModelAndView mostrarCategorias() {
         ModelAndView mv = new ModelAndView("categoria/categorias");
         mv.addObject("categorias", categoriaService.findAllCategorias());

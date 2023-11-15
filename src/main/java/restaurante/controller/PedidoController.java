@@ -50,7 +50,7 @@ public class PedidoController {
         return mv;
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/pedidos")
     public ModelAndView mostrarPedidos() {
         ModelAndView mv = new ModelAndView("pedido/pedidos");
         mv.addObject("pedido", pedidoService.findAllPedidos());

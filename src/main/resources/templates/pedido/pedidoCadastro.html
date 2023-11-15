@@ -9,7 +9,7 @@
 <body>
 <section layout:fragment="content" class="margem">
     <h3 class="inline">Novo Imóvel</h3>
-    <a class="btn btn-default voltar" th:href="@{/pedido/todos}">
+    <a class="btn btn-default voltar" th:href="@{/pedido/pedidos}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
     <h1 th:if="${#lists.isEmpty(estados)}" class="is-invalid">Não é possível cadastrar Imóvel sem Estado</h1>

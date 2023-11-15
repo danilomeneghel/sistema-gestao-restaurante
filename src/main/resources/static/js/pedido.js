@@ -65,7 +65,7 @@ $(document).ready(function () {
             }
         ],
         ajax: {
-            url: '/api/pedido/todos',
+            url: '/api/pedido/pedidos',
             type: 'GET',
             datatype: 'json',
             dataSrc: ''

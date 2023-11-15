@@ -22,7 +22,7 @@ public class CardapioItem {
 
     private String nome;
 
-    private List<Categoria> categorias;
+    private Categoria categoria;
 
     private List<Produto> produtos;
 

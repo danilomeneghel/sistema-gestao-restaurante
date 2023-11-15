@@ -24,7 +24,7 @@ public class ProdutoController {
     @Autowired
     private CardapioItemService cardapioItemService;
 
-    @GetMapping("/todos")
+    @GetMapping("/produtos")
     public ModelAndView mostrarProdutos() {
         ModelAndView mv = new ModelAndView("produto/produtos");
         mv.addObject("produtos", produtoService.findAllProdutos());
