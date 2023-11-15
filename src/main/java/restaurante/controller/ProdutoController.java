@@ -38,14 +38,13 @@ public class ProdutoController {
         return mv;
     }
 
-    @PostMapping(value = "/cadastrar", consumes = "multipart/form-data")
+    @PostMapping("/cadastrar")
     public ModelAndView cadastrarProduto(@Validated Produto produto, Errors errors) {
         ModelAndView mv = new ModelAndView("produto/produtoCadastro");
         if (errors.hasErrors()) {
             return mv;
         }
         mv.addObject("sucesso", "O Produto foi cadastrado com sucesso!");
-        produto.setImagens(produtoService.findProdutoById(produto.getId()).getImagens());
         produtoService.salvarProduto(produto);
         mv.addObject("produto", new Produto());
         return mv;
@@ -58,14 +57,13 @@ public class ProdutoController {
         return mv;
     }
 
-    @PostMapping(value = "/editar", consumes = "multipart/form-data")
+    @PostMapping("/editar")
     public ModelAndView editarProduto(@Validated Produto produto, Errors errors) {
         ModelAndView mv = new ModelAndView("produto/produtoEditar");
         if (errors.hasErrors()) {
             return mv;
         }
         mv.addObject("sucesso", "O Produto foi atualizado com sucesso!");
-        produto.setImagens(produtoService.findProdutoById(produto.getId()).getImagens());
         produtoService.salvarProduto(produto);
         return mv;
     }

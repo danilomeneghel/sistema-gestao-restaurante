@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import restaurante.entity.CardapioItemEntity;
+import restaurante.model.CardapioItem;
 import restaurante.model.Categoria;
 import restaurante.model.Pedido;
 import restaurante.service.CategoriaService;
@@ -75,9 +76,9 @@ public class PedidoController {
         addObj(mv);
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
-        List<CardapioItemEntity> cardapioItems = pedido.getCardapioItems();
+        CardapioItem cardapioItem = pedido.getCardapioItem();
 
-        if (cardapioItems.isEmpty()) {
+        if (cardapioItem != null) {
             customMessage.add("O Item de Cardápio selecionado deve ser válido.");
             mv.addObject("erroCardapio", true);
             erro = true;
@@ -100,11 +101,11 @@ public class PedidoController {
         ModelAndView mv = new ModelAndView("pedido/pedidoEditar");
 
         Pedido pedido = pedidoService.findPedidoById(id);
-        List<CardapioItemEntity> cardapioItems = pedido.getCardapioItems();
+        CardapioItem cardapioItem = pedido.getCardapioItem();
 
         addObj(mv);
         mv.addObject("pedido", pedido);
-        mv.addObject("cardapioItems", cardapioItems);
+        mv.addObject("cardapioItem", cardapioItem);
         return mv;
     }
 
@@ -115,9 +116,9 @@ public class PedidoController {
         addObj(mv);
 
         List<String> customMessage = new ArrayList<String>();
-        List<CardapioItemEntity> cardapioItems = pedido.getCardapioItems();
+        CardapioItem cardapioItem = pedido.getCardapioItem();
 
-        if (cardapioItems.isEmpty()) {
+        if (cardapioItem != null) {
             customMessage.add("O Item do Cardápio selecionado deve ser válido.");
             mv.addObject("erroCardapioItem", true);
             erro = true;
@@ -141,20 +142,6 @@ public class PedidoController {
             ra.addFlashAttribute("erro", "O Pedido não foi encontrado.");
         }
         return new ModelAndView("redirect:/pedido/pedidos");
-    }
-
-    @GetMapping("/visualizar/pedido-usuario/{id}")
-    public ModelAndView visualizarPedidoUsuario(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("pedido/pedidoVisualizarUsuario");
-        mv.addObject("pedido", pedidoService.findPedidoById(id));
-        return mv;
-    }
-
-    @GetMapping("/visualizar/{id}")
-    public ModelAndView visualizarPedido(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("pedido/pedidoVisualizar");
-        mv.addObject("pedido", pedidoService.findPedidoById(id));
-        return mv;
     }
 
     private void addObj(ModelAndView mv) {

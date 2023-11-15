@@ -20,7 +20,7 @@ public class ImagemEntity {
     private String path;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_produto", nullable = false)
-    private ProdutoEntity produto;
+    @JoinColumn(name = "id_cardapio_item", nullable = false)
+    private CardapioItemEntity cardapioItem;
 
 }

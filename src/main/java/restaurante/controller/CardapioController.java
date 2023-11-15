@@ -85,7 +85,7 @@ public class CardapioController {
         return new ModelAndView("redirect:/cardapio/cardapios");
     }
 
-    @GetMapping("/cardapio-item/todos")
+    @GetMapping("/cardapio-items")
     public ModelAndView mostrarCardapioItems() {
         ModelAndView mv = new ModelAndView("cardapio-item/cardapioItems");
         mv.addObject("cardapioItems", cardapioItemService.findAllCardapioItems());
@@ -99,13 +99,14 @@ public class CardapioController {
         return mv;
     }
 
-    @PostMapping("/cardapio-item/cadastrar")
+    @PostMapping(value = "/cardapio-item/cadastrar", consumes = "multipart/form-data")
     public ModelAndView cadastrarCardapioItem(@Validated CardapioItem cardapioItem, Errors errors) {
         ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemCadastro");
         if (errors.hasErrors()) {
             return mv;
         }
         mv.addObject("sucesso", "O Item do Cardápio foi cadastrado com sucesso!");
+        cardapioItem.setImagens(cardapioItemService.findCardapioItemById(cardapioItem.getId()).getImagens());
         cardapioItemService.salvarCardapioItem(cardapioItem);
         mv.addObject("cardapioItem", new CardapioItem());
         return mv;
@@ -118,14 +119,22 @@ public class CardapioController {
         return mv;
     }
 
-    @PostMapping("/cardapio-item/editar")
+    @PostMapping(value = "/cardapio-item/editar", consumes = "multipart/form-data")
     public ModelAndView editarCardapioItem(@Validated CardapioItem cardapioItem, Errors errors) {
         ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemEditar");
         if (errors.hasErrors()) {
             return mv;
         }
         mv.addObject("sucesso", "O Item Do Cardápio foi atualizado com sucesso!");
+        cardapioItem.setImagens(cardapioItemService.findCardapioItemById(cardapioItem.getId()).getImagens());
         cardapioItemService.salvarCardapioItem(cardapioItem);
+        return mv;
+    }
+
+    @GetMapping("/cardapio-item/visualizar/{id}")
+    public ModelAndView visualizarPedido(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("pedido/pedidoVisualizar");
+        mv.addObject("cardapio-item", cardapioItemService.findCardapioItemById(id));
         return mv;
     }
 

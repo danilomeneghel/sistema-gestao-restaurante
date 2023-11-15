@@ -19,6 +19,9 @@ public class CardapioItemService {
     @Autowired
     private CardapioItemRepository cardapioItemRepository;
 
+    @Autowired
+    private ImagemService imagemService;
+
     private ModelMapper modelMapper = new ModelMapper();
 
     public List<CardapioItem> findAllCardapioItems() {
@@ -46,6 +49,9 @@ public class CardapioItemService {
     public CardapioItem salvarCardapioItem(CardapioItem cardapioItem) {
         CardapioItemEntity cardapioItemEntity = modelMapper.map(cardapioItem, CardapioItemEntity.class);
         CardapioItemEntity salvarCardapioItem = cardapioItemRepository.save(cardapioItemEntity);
+        if (salvarCardapioItem != null) {
+            imagemService.armazenarImagem(salvarCardapioItem.getId(), cardapioItem.getFiles());
+        }
         return modelMapper.map(salvarCardapioItem, CardapioItem.class);
     }
 

@@ -17,9 +17,16 @@
         <div th:replace="fragments/mensagemSucesso"></div>
 
         <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
-            <label for="nome">Negócio</label>
+            <label for="nome">Produto</label>
             <input class="form-control" id="nome" th:field="*{nome}"
-                   placeholder="Digite o nome do Negócio" required>
+                   placeholder="Digite o nome do Produto" required>
+        </div>
+        <div class="form-item col-5" th:classappend="${erroCardapioItem}? is-invalid">
+            <label for="cardapio-item-select">Item do Cadápio</label>
+            <select id="cardapio-item-select" th:field="*{cardapioItem.id}" class="form-control">
+                <option value="" selected>Escolha o Item do Cardápio</option>
+                <option th:each="car:${cardapioItems}" th:value="${car.id}" th:text="${car.nome}">
+            </select>
         </div>
         <input type="hidden" th:field="*{id}">
         <button type="submit" class="btn btn-success">

@@ -22,7 +22,4 @@ public class ProdutoEntity {
     @JoinColumn(name = "id_cardapio_item", nullable = false)
     private CardapioItemEntity cardapioItem;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.REMOVE)
-    private List<ImagemEntity> imagens;
-
 }

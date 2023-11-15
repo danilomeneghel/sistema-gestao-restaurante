@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         ],
         ajax: {
-            url: '/api/cardapio/cardapio-item/todos',
+            url: '/api/cardapio/cardapio-items',
             type: 'GET',
             datatype: 'json',
             dataSrc: ''
@@ -61,10 +61,9 @@ $(document).ready(function () {
         },
         columns: [
             { "data": "id" },
+            { "data": "categoria.nome" },
             { "data": "cardapio.nome" },
             { "data": "nome" },
-            { "data": "categorias.nome" },
-            { "data": "produtos.nome" },
             { "data": "preco" },
             {
                 "data": null, "render": function (data) {

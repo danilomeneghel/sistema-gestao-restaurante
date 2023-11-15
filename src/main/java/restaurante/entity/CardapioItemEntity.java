@@ -20,23 +20,26 @@ public class CardapioItemEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria")
+    private CategoriaEntity categoria;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cardapio")
     private CardapioEntity cardapio;
 
     @NotBlank(message = "O nome do item do cardápio não pode estar em branco.")
     private String nome;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria")
-    private CategoriaEntity categoria;
-
-    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
-    private List<ProdutoEntity> produtos;
+    @NotBlank(message = "Os nomes dos produtos não podem estar em branco.")
+    private String produtos;
 
     @NotNull(message = "O preço do item do cardápio não pode estar em branco.")
     @DecimalMin(value = "0.01", message = "O preço não pode ser R$0.00 ou negativo.")
     @DecimalMax(value = "99999999.99", message = "O preço não pode ser maior que R$10000000.00")
     private BigDecimal preco;
+
+    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
+    private List<ImagemEntity> imagens;
 
     @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
     private List<PedidoEntity> pedidos;

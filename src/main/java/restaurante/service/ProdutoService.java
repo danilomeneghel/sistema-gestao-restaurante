@@ -17,9 +17,6 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    @Autowired
-    private ImagemService imagemService;
-
     private ModelMapper modelMapper = new ModelMapper();
 
     public List<Produto> findAllProdutos() {
@@ -38,9 +35,6 @@ public class ProdutoService {
     public Produto salvarProduto(Produto produto) {
         ProdutoEntity produtoEntity = modelMapper.map(produto, ProdutoEntity.class);
         ProdutoEntity salvarProduto = produtoRepository.save(produtoEntity);
-        if (salvarProduto != null) {
-            imagemService.armazenarImagem(salvarProduto.getId(), produto.getFiles());
-        }
         return modelMapper.map(salvarProduto, Produto.class);
     }
 

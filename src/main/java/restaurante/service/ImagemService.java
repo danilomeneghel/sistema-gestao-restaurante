@@ -8,11 +8,15 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import restaurante.entity.CardapioEntity;
+import restaurante.entity.CardapioItemEntity;
 import restaurante.entity.ImagemEntity;
 import restaurante.entity.PedidoEntity;
 import restaurante.exception.FileStorageException;
+import restaurante.model.CardapioItem;
 import restaurante.model.Imagem;
 import restaurante.model.Produto;
+import restaurante.repository.CardapioItemRepository;
 import restaurante.repository.ImagemRepository;
 import restaurante.repository.PedidoRepository;
 
@@ -38,11 +42,11 @@ public class ImagemService {
     private ImagemRepository imagemRepository;
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private CardapioItemRepository cardapioItemRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
 
-    public String armazenarImagem(Long idImovel, MultipartFile[] arquivos) {
+    public String armazenarImagem(Long idCardapioItem, MultipartFile[] arquivos) {
         String mensagem = null;
         if (!arquivos[0].isEmpty()) {
             try {
@@ -62,9 +66,9 @@ public class ImagemService {
                     Imagem imagem = new Imagem();
                     imagem.setFile(novoNomeArquivo.toString());
                     imagem.setPath(DIR_IMAGE);
-                    Optional<PedidoEntity> imovelEntity = pedidoRepository.findById(idImovel);
-                    Produto produto = modelMapper.map(imovelEntity.get(), Produto.class);
-                    imagem.setProduto(produto);
+                    Optional<CardapioItemEntity> cardapioItemEntity = cardapioItemRepository.findById(idCardapioItem);
+                    CardapioItem cardapioItem = modelMapper.map(cardapioItemEntity.get(), CardapioItem.class);
+                    imagem.setCardapioItem(cardapioItem);
                     Imagem imagemSalva = this.salvarImagem(imagem);
                     if (imagemSalva == null) {
                         throw new FileStorageException("Erro ao salvar imagem " + nomeArquivo + ". Por favor, tente novamente.");

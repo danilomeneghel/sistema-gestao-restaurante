@@ -45,8 +45,8 @@ public class ApiImagemController {
     }
 
     @PostMapping("/armazenar-imagem")
-    public ResponseEntity<String> armazenarImagem(@PathVariable Long idImovel, @RequestBody MultipartFile[] arquivos) {
-        return new ResponseEntity<>(imagemService.armazenarImagem(idImovel, arquivos), HttpStatus.CREATED);
+    public ResponseEntity<String> armazenarImagem(@PathVariable Long idCardapioItem, @RequestBody MultipartFile[] arquivos) {
+        return new ResponseEntity<>(imagemService.armazenarImagem(idCardapioItem, arquivos), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/excluir/{id}")

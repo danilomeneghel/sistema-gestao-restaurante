@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import restaurante.entity.CardapioItemEntity;
+import restaurante.entity.CategoriaEntity;
 import restaurante.entity.PedidoEntity;
 import restaurante.model.CardapioItem;
 import restaurante.model.Categoria;
@@ -45,9 +46,8 @@ public class PedidoService {
 
     public List<Pedido> findPedidosByConfirmadoAndCategoria(Categoria categoria) {
         if (categoria.getId() != null) {
-            List<CardapioItem> cardapioItems = cardapioItemService.findCardapioItemByCategoria(categoria);
-            List<CardapioItemEntity> cardapioItemsEntities = cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItemEntity.class)).collect(Collectors.toList());
-            List<PedidoEntity> pedidos = pedidoRepository.findByStatusTrueAndCardapioItemsIn(cardapioItemsEntities);
+            CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
+            List<PedidoEntity> pedidos = pedidoRepository.findByStatusTrueAndCardapioItemCategoria(categoriaEntity);
             if (!pedidos.isEmpty()) {
                 return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
             }
@@ -58,7 +58,7 @@ public class PedidoService {
     public List<Pedido> findPedidosByCardapioItem(CardapioItem cardapioItem) {
         if (cardapioItem.getId() != null) {
             CardapioItemEntity cardapioItemEntity = modelMapper.map(cardapioItem, CardapioItemEntity.class);
-            List<PedidoEntity> pedidos = pedidoRepository.findByCardapioItemsNome(cardapioItemEntity.getNome());
+            List<PedidoEntity> pedidos = pedidoRepository.findByCardapioItemNome(cardapioItemEntity.getNome());
             if (!pedidos.isEmpty()) {
                 return pedidos.stream().map(entity -> modelMapper.map(entity, Pedido.class)).collect(Collectors.toList());
             }

@@ -19,6 +19,6 @@ public class Imagem {
     private String path;
 
     @JsonIgnore
-    private Produto produto;
+    private CardapioItem cardapioItem;
 
 }
