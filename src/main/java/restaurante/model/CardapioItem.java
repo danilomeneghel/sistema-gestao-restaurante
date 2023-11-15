@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import restaurante.entity.PedidoEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,5 +28,8 @@ public class CardapioItem {
     private List<Produto> produtos;
 
     private BigDecimal preco;
+
+    @JsonIgnore
+    private List<Pedido> pedidos;
 
 }

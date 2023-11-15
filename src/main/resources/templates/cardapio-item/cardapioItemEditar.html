@@ -16,16 +16,32 @@
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('quantidade')}? is-invalid">
-            <label for="quantidade">Quantidade de Quartos</label>
-            <input class="form-control" id="quantidade" th:field="*{quantidade}"
-                   placeholder="Digite a quantidade de quarto" required>
+        <div class="form-item col-5" th:classappend="${erroCardapio}? is-invalid">
+            <label for="cardapio-select">Cardápio</label>
+            <select id="cardapio-select" th:field="*{produto.id}" class="form-control">
+                <option value="" selected>Escolha o Cardápio</option>
+                <option th:each="car:${cardapios}" th:value="${car.id}" th:text="${car.nome}">
+            </select>
         </div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('descricao')}? is-invalid">
-            <label for="descricao">Descrição dos Quartos</label>
-            <input class="form-control" id="descricao" th:field="*{descricao}"
-                   placeholder="Digite a Descrição dos Quartos" required>
+        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Nome do Item</label>
+            <input class="form-control" id="nome" th:field="*{nome}"
+                   placeholder="Digite o nome do Item" required>
+        </div>
+
+        <div class="form-item col-5" th:classappend="${erroCategoria}? is-invalid">
+            <label for="categoria-select">Categoria</label>
+            <select id="categoria-select" th:field="*{categoria.id}" class="form-control">
+                <option value="" selected>Escolha a Categoria</option>
+                <option th:each="cat:${categorias}" th:value="${cat.id}" th:text="${cat.nome}">
+            </select>
+        </div>
+
+        <div class="form-item" th:classappend="${#fields.hasErrors('preco')}? is-invalid">
+            <label for="preco">Preço</label>
+            <input class="form-control" id="preco" th:field="*{preco}"
+                   placeholder="Digite o Preço" required>
         </div>
         <input type="hidden" th:field="*{id}">
         <button type="submit" class="btn btn-success">

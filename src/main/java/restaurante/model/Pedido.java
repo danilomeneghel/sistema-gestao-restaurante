@@ -18,7 +18,7 @@ public class Pedido {
 
     private Long id;
 
-    private List<CardapioItemEntity> cardapioItems;
+    private CardapioItem cardapioItem;
 
     private String observacao;
 

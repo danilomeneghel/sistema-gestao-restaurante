@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import restaurante.entity.CardapioItemEntity;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public class Cardapio {
 
     private String nome;
 
-    private List<CardapioItem> cardapioItems;
+    private List<CardapioItemEntity> cardapioItems;
 
 }

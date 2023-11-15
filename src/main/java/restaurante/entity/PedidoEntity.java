@@ -19,8 +19,9 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE)
-    private List<CardapioItemEntity> cardapioItems;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cardapio_item")
+    private CardapioItemEntity cardapioItem;
 
     private String observacao;
 

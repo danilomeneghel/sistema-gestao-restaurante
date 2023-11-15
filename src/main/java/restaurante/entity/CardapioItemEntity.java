@@ -38,8 +38,7 @@ public class CardapioItemEntity {
     @DecimalMax(value = "99999999.99", message = "O preço não pode ser maior que R$10000000.00")
     private BigDecimal preco;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_pedido")
-    private PedidoEntity pedido;
+    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
+    private List<PedidoEntity> pedidos;
 
 }

@@ -16,16 +16,10 @@
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('quantidade')}? is-invalid">
-            <label for="quantidade">Quantidade de Quartos</label>
-            <input class="form-control" id="quantidade" th:field="*{quantidade}"
-                   placeholder="Digite a quantidade de quarto" required>
-        </div>
-
-        <div class="form-item" th:classappend="${#fields.hasErrors('descricao')}? is-invalid">
-            <label for="descricao">Descrição dos Quartos</label>
-            <input class="form-control" id="descricao" th:field="*{descricao}"
-                   placeholder="Digite a Descrição dos Quartos" required>
+        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Nome</label>
+            <input class="form-control" id="nome" th:field="*{nome}"
+                   placeholder="Digite o nome do Cardápio" required>
         </div>
         <input type="hidden" th:field="*{id}">
         <button type="submit" class="btn btn-success">
