@@ -12,7 +12,7 @@
     <a class="btn btn-default voltar" th:href="@{/produto/produtos}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <form th:action="@{/classificador/produto/cadastrar}" method="post" th:object="${produto}">
+    <form th:action="@{/produto/cadastrar}" method="post" th:object="${produto}">
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
@@ -20,13 +20,6 @@
             <label for="nome">Produto</label>
             <input class="form-control" id="nome" th:field="*{nome}"
                    placeholder="Digite o nome do Produto" required>
-        </div>
-        <div class="form-item col-5" th:classappend="${erroCardapioItem}? is-invalid">
-            <label for="cardapio-item-select">Item do Cadápio</label>
-            <select id="cardapio-item-select" th:field="*{cardapioItem.id}" class="form-control">
-                <option value="" selected>Escolha o Item do Cardápio</option>
-                <option th:each="car:${cardapioItems}" th:value="${car.id}" th:text="${car.nome}">
-            </select>
         </div>
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Salvar

@@ -22,20 +22,16 @@ public class CardapioItem {
 
     private Categoria categoria;
 
-    @JsonIgnore
     private Cardapio cardapio;
 
     private String nome;
 
-    private String produtos;
+    private List<Produto> produtos;
 
     private BigDecimal preco;
 
     private List<Imagem> imagens;
 
     private MultipartFile[] files;
-
-    @JsonIgnore
-    private List<Pedido> pedidos;
 
 }

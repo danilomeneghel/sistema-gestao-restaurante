@@ -12,7 +12,7 @@
     <a class="btn btn-default voltar" th:href="@{/cardapio/cardapios}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <form th:action="@{/classificador/quarto/editar}" method="post" th:object="${quarto}">
+    <form th:action="@{/cardapio/editar}" method="post" th:object="${cardapio}">
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 

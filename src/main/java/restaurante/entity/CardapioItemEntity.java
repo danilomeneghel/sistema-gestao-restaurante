@@ -41,7 +41,4 @@ public class CardapioItemEntity {
     @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
     private List<ImagemEntity> imagens;
 
-    @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
-    private List<PedidoEntity> pedidos;
-
 }

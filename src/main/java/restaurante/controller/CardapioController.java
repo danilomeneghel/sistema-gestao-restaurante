@@ -14,6 +14,10 @@ import restaurante.model.Cardapio;
 import restaurante.model.CardapioItem;
 import restaurante.service.CardapioItemService;
 import restaurante.service.CardapioService;
+import restaurante.service.CategoriaService;
+import restaurante.service.ProdutoService;
+
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cardapio")
@@ -24,6 +28,12 @@ public class CardapioController {
 
     @Autowired
     private CardapioItemService cardapioItemService;
+
+    @Autowired
+    private CategoriaService categoriaService;
+
+    @Autowired
+    private ProdutoService produtoService;
 
     @GetMapping("/cardapios")
     public ModelAndView mostrarCardapios() {
@@ -73,10 +83,6 @@ public class CardapioController {
     public ModelAndView excluirCardapio(@PathVariable Long id, RedirectAttributes ra) {
         Cardapio cardapio = cardapioService.findCardapioById(id);
         if (cardapio != null) {
-            if (!cardapioItemService.findCardapioItemByNome(cardapio.getCardapioItems().get(0).getNome()).isEmpty()) {
-                ra.addFlashAttribute("customMessage", "Não é possível excluir um cardápio com " +
-                        "items de cardápio vinculados.");
-            }
             cardapioService.excluirCardapio(id);
             ra.addFlashAttribute("sucesso", "O Negócio foi excluído com sucesso.");
         } else {
@@ -96,6 +102,9 @@ public class CardapioController {
     public ModelAndView cadastroCardapioItem() {
         ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemCadastro");
         mv.addObject("cardapioItem", new CardapioItem());
+        mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("cardapios", cardapioService.findAllCardapios());
+        mv.addObject("produtos", produtoService.findAllProdutos());
         return mv;
     }
 
@@ -105,10 +114,10 @@ public class CardapioController {
         if (errors.hasErrors()) {
             return mv;
         }
-        mv.addObject("sucesso", "O Item do Cardápio foi cadastrado com sucesso!");
         cardapioItem.setImagens(cardapioItemService.findCardapioItemById(cardapioItem.getId()).getImagens());
         cardapioItemService.salvarCardapioItem(cardapioItem);
         mv.addObject("cardapioItem", new CardapioItem());
+        mv.addObject("sucesso", "O Item do Cardápio foi cadastrado com sucesso!");
         return mv;
     }
 
@@ -116,6 +125,9 @@ public class CardapioController {
     public ModelAndView editaCardapioItem(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemEditar");
         mv.addObject("cardapioItem", cardapioItemService.findCardapioItemById(id));
+        mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("cardapios", cardapioService.findAllCardapios());
+        mv.addObject("produtos", produtoService.findAllProdutos());
         return mv;
     }
 

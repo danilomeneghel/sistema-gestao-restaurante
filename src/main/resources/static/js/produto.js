@@ -62,7 +62,6 @@ $(document).ready(function () {
         columns: [
             { "data": "id" },
             { "data": "nome" },
-            { "data": "cardapioItem.nome" },
             {
                 "data": null, "render": function (data) {
                     return '<div class="actions"><a class="btn btn-primary" href="/produto/editar/'+data.id+'">'+

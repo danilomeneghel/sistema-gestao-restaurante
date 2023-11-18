@@ -18,6 +18,4 @@ public class Cardapio {
 
     private String nome;
 
-    private List<CardapioItemEntity> cardapioItems;
-
 }

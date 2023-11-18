@@ -1,4 +1,8 @@
-INSERT INTO `categoria` VALUES (1,'Almoço'),(2,'Janta'),(3,'Lanche'),(4,'Bebida'),(5,'Sobremesa');
+INSERT INTO `categoria` VALUES (1,'Comida'),(2,'Salgado'),(3,'Bebida'),(4,'Bebida Alcoólica'),(5,'Sobremesa');
+
+INSERT INTO `cardapio` VALUES (1,'Almoço'),(2,'Janta'),(3,'Lanche'),(4,'Café');
+
+INSERT INTO `produto` VALUES (1,'Arroz'),(2,'Feijão'),(3,'Massa'),(4,'Batata Frita'),(5,'Carne Bovina'),(6,'Frango'),(7,'Ovo'),(8,'Guaraná Antarctica'),(9,'Coca-cola'),(10,'Cerveja Skol'),(11,'Xis Salada'),(12,'Pudim');
 
 INSERT INTO `estado` VALUES (1,'São Paulo','SP'),(2,'Rio de Janeiro','RJ'),(3,'Rio Grande do Norte','RN'),(4,'Minas Gerais','MG');
 

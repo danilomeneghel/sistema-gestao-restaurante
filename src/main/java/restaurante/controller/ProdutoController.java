@@ -72,10 +72,6 @@ public class ProdutoController {
     public ModelAndView excluirProduto(@PathVariable Long id, RedirectAttributes ra) {
         Produto produto = produtoService.findProdutoById(id);
         if (produto != null) {
-            if (!cardapioItemService.findCardapioItemByNome(produto.getCardapioItem().getNome()).isEmpty()) {
-                ra.addFlashAttribute("customMessage", "Não é possível excluir um produto com " +
-                        "items de cardápio vinculados.");
-            }
             produtoService.excluirProduto(id);
             ra.addFlashAttribute("sucesso", "O Produto foi excluído com sucesso.");
         } else {

@@ -1,6 +1,5 @@
 package restaurante.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +17,6 @@ public class Produto {
     private Long id;
 
     private String nome;
-
-    @JsonIgnore
-    private CardapioItem cardapioItem;
 
     private List<Imagem> imagens;
 

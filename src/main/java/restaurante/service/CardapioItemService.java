@@ -48,6 +48,8 @@ public class CardapioItemService {
 
     public CardapioItem salvarCardapioItem(CardapioItem cardapioItem) {
         CardapioItemEntity cardapioItemEntity = modelMapper.map(cardapioItem, CardapioItemEntity.class);
+        String produtos = cardapioItem.getProdutos().stream().map(Object::toString).collect(Collectors.joining(", "));
+        cardapioItemEntity.setProdutos(produtos);
         CardapioItemEntity salvarCardapioItem = cardapioItemRepository.save(cardapioItemEntity);
         if (salvarCardapioItem != null) {
             imagemService.armazenarImagem(salvarCardapioItem.getId(), cardapioItem.getFiles());

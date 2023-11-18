@@ -12,7 +12,7 @@
     <a class="btn btn-default voltar" th:href="@{/cardapio/cardapio-items}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <form th:action="@{/cardapio-item/cadastrar}" method="post" th:object="${cardapio-item}">
+    <form th:action="@{/cardapio/cardapio-item/cadastrar}" method="post" th:object="${cardapioItem}" enctype="multipart/form-data">
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
@@ -38,10 +38,11 @@
                    placeholder="Digite o nome do Item" required>
         </div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('produtos')}? is-invalid">
-            <label for="produtos">Produtos</label>
-            <input class="form-control" id="produtos" th:field="*{produtos}"
-                   placeholder="Digite os Produtos" required>
+        <div class="form-item col-5" th:classappend="${erroProduto}? is-invalid">
+            <label for="produto-select">Produtos (Ingredientes)</label>
+            <select id="produto-select" th:field="*{produtos}" multiple class="form-control">
+                <option th:each="pro:${produtos}" th:value="${pro.id}" th:text="${pro.nome}">
+            </select>
         </div>
 
         <div class="form-item" th:classappend="${#fields.hasErrors('preco')}? is-invalid">
@@ -49,6 +50,12 @@
             <input class="form-control" id="preco" th:field="*{preco}"
                    placeholder="Digite o Preço" required>
         </div>
+
+        <div class="add-photo">
+            <label for="file">Imagem</label>
+            <input class="form-control input-file" type="file" multiple="multiple" id="file" name="files[]"/>
+        </div>
+        <br><br>
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Salvar
         </button>
