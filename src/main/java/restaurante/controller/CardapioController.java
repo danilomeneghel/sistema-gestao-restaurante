@@ -111,11 +111,10 @@ public class CardapioController {
     @PostMapping(value = "/cardapio-item/cadastrar", consumes = "multipart/form-data")
     public ModelAndView cadastrarCardapioItem(@Validated CardapioItem cardapioItem, Errors errors) {
         ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemCadastro");
+        cardapioItemService.salvarCardapioItem(cardapioItem);
         if (errors.hasErrors()) {
             return mv;
         }
-        cardapioItem.setImagens(cardapioItemService.findCardapioItemById(cardapioItem.getId()).getImagens());
-        cardapioItemService.salvarCardapioItem(cardapioItem);
         mv.addObject("cardapioItem", new CardapioItem());
         mv.addObject("sucesso", "O Item do Cardápio foi cadastrado com sucesso!");
         return mv;

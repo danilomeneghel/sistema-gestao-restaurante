@@ -40,7 +40,7 @@
 
         <div class="form-item col-5" th:classappend="${erroProduto}? is-invalid">
             <label for="produto-select">Produtos (Ingredientes)</label>
-            <select id="produto-select" th:field="*{produtos}" multiple class="form-control">
+            <select id="produto-select" th:field="*{{produtos}}" multiple class="form-control">
                 <option th:each="pro:${produtos}" th:value="${pro.id}" th:text="${pro.nome}">
             </select>
         </div>
