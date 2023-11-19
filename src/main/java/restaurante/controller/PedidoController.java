@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import restaurante.entity.CardapioItemEntity;
 import restaurante.model.CardapioItem;
 import restaurante.model.Categoria;
 import restaurante.model.Pedido;

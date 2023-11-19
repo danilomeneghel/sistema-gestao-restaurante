@@ -17,8 +17,6 @@ import restaurante.service.CardapioService;
 import restaurante.service.CategoriaService;
 import restaurante.service.ProdutoService;
 
-import java.util.stream.Collectors;
-
 @Controller
 @RequestMapping("/cardapio")
 public class CardapioController {

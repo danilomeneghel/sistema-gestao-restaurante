@@ -23,7 +23,9 @@ public class CardapioItem {
 
     private String nome;
 
-    private String[] produtos;
+    private String produtos;
+
+    private String[] produtosArray;
 
     private BigDecimal preco;
 

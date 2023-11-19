@@ -8,17 +8,13 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import restaurante.entity.CardapioEntity;
 import restaurante.entity.CardapioItemEntity;
 import restaurante.entity.ImagemEntity;
-import restaurante.entity.PedidoEntity;
 import restaurante.exception.FileStorageException;
 import restaurante.model.CardapioItem;
 import restaurante.model.Imagem;
-import restaurante.model.Produto;
 import restaurante.repository.CardapioItemRepository;
 import restaurante.repository.ImagemRepository;
-import restaurante.repository.PedidoRepository;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
