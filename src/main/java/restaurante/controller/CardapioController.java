@@ -144,8 +144,9 @@ public class CardapioController {
 
     @GetMapping("/cardapio-item/visualizar/{id}")
     public ModelAndView visualizarPedido(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("pedido/pedidoVisualizar");
-        mv.addObject("cardapio-item", cardapioItemService.findCardapioItemById(id));
+        ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemVisualizar");
+        CardapioItem cardapioItem = cardapioItemService.findCardapioItemById(id);
+        mv.addObject("cardapio-item", cardapioItem);
         return mv;
     }
 

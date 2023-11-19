@@ -4,11 +4,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout.html}">
 <head>
-    <title>Visualização de Imóvel</title>
+    <title>Visualização de Cardápio</title>
 </head>
 <body>
 <section layout:fragment="content" class="margem">
-    <h3 class="inline">Visualização de Imóvel</h3>
+    <h3 class="inline">Visualização de Cardápio</h3>
     <a class="btn btn-default voltar" th:href="@{/cardapio/cardapio-items}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
@@ -16,11 +16,11 @@
         <div class="row">
             <div class="col-3">
                 <b>Categoria: </b>
-                <span th:text="${cardapio-item.categoria.nome}"></span>
+                <!--<span th:text="${cardapio-item.categoria.nome}"></span>-->
             </div>
             <div class="col-3">
                 <b>Cardápio: </b>
-                <span th:text="${cardapio-item.cardapio.nome}"></span>
+                <!--<span th:text="${cardapio-item.cardapio.nome}"></span>-->
             </div>
             <div class="col-6">
                 <b>Item do Cardápio: </b>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <br>
-        <div class="row">
+        <!-- <div class="row">
             <h4>Fotos:</h4>
         </div>
         <div class="row" th:unless="${cardapio-item.imagens.size>0}">
@@ -64,7 +64,7 @@
                     <i class="fas fa-plus"></i> Adicionar
                 </button>
             </form>
-        </div>
+        </div> -->
     </div>
 </section>
 </body>

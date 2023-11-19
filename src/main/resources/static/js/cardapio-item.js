@@ -66,8 +66,10 @@ $(document).ready(function () {
             { "data": "nome" },
             { "data": "preco" },
             {
-                "data": null, "render": function (data) {
-                    return '<div class="actions"><a class="btn btn-primary" href="/cardapio/cardapio-item/editar/'+data.id+'">'+
+                "data": null, "render": function ( data ) {
+                    return '<div class="actions"><a class="btn btn-success" href="/cardapio/cardapio-item/visualizar/'+data.id+'">'+
+                    '<i class="fas fa-eye"></i> Ver</a>'+
+                    '<a class="btn btn-primary" href="/cardapio/cardapio-item/editar/'+data.id+'">'+
                     '<i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger" '+
                     'onclick="return confirm(\'Tem certeza que deseja excluir esse registro?\');" '+
                     'href="/cardapio/cardapio-item/excluir/'+data.id+'"><i class="fas fa-trash"></i> Excluir</a></div>'
