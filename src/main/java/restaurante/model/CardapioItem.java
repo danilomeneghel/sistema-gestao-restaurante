@@ -1,13 +1,10 @@
 package restaurante.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
-import restaurante.entity.ImagemEntity;
-import restaurante.entity.PedidoEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,7 +23,7 @@ public class CardapioItem {
 
     private String nome;
 
-    private Produto[] produtos;
+    private String[] produtos;
 
     private BigDecimal preco;
 

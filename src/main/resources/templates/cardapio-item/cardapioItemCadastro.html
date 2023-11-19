@@ -12,7 +12,8 @@
     <a class="btn btn-default voltar" th:href="@{/cardapio/cardapio-items}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <form th:action="@{/cardapio/cardapio-item/cadastrar}" method="post" th:object="${cardapioItem}" enctype="multipart/form-data">
+    <form th:action="@{/cardapio/cardapio-item/cadastrar}" method="post" th:object="${cardapioItem}"
+          enctype="multipart/form-data">
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
@@ -40,8 +41,8 @@
 
         <div class="form-item col-5" th:classappend="${erroProduto}? is-invalid">
             <label for="produto-select">Produtos (Ingredientes)</label>
-            <select id="produto-select" th:field="*{{produtos}}" multiple class="form-control">
-                <option th:each="pro:${produtos}" th:value="${pro.id}" th:text="${pro.nome}">
+            <select id="produto-select" multiple="multiple" th:field="*{produtos}" name="produtos" class="form-control">
+                <option th:each="pro:${produtos}" th:value="${pro}" th:text="${pro.nome}"></option>
             </select>
         </div>
 
