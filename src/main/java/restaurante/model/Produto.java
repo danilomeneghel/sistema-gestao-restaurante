@@ -15,9 +15,4 @@ public class Produto {
 
     private String nome;
 
-    @Override
-    public String toString() {
-        return "{\"id\":" + id + ", \"nome\":\"" + nome + "\"}";
-    }
-
 }
