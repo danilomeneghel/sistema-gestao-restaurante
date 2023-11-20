@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $('#filtrar-imovel').on('change', function() {
+    $('#filtrar-pedido').on('change', function() {
         var value = $(this).val();
         $.ajax({
-            url: '/imovel/imoveis-disponiveis/' + value,
+            url: '/pedido/pedidos-disponiveis/' + value,
             type: 'GET',
             success: function(result) {
                 $("#imoveis").html(result);

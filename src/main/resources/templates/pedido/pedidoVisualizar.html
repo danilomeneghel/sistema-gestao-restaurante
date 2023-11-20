@@ -4,63 +4,59 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout.html}">
 <head>
-    <title>Visualização de Imóvel</title>
+    <title>Visualização de Pedido</title>
 </head>
 <body>
 <section layout:fragment="content" class="margem">
-    <h3 class="inline">Visualização de Imóvel</h3>
+    <h3 class="inline">Visualização de Pedido</h3>
     <a class="btn btn-default voltar" th:href="@{/pedido/pedidos}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
     <div class="margem-visualizar">
         <div class="row">
-            <div class="col-3">
-                <b>Categoria: </b>
-                <span th:text="${pedido.categoria.nome}"></span>
-            </div>
-            <div class="col-3">
-                <b>Negócio: </b>
-                <span th:text="${pedido.produto.nome}"></span>
+            <div class="col-6">
+                <b>Categorias: </b>
+                <div class="card card-pedido col-3" th:each="cardapioItem:${pedido.cardapioItens}">
+                    <span th:text="${cardapioItem.categoria.nome}"></span>
+                </div>
             </div>
             <div class="col-6">
-                <b>Quarto: </b>
-                <span th:text="${pedido.quarto.descricao}"></span>
+                <b>Itens do Cardápio: </b>
+                <div class="card card-pedido col-3" th:each="cardapioItem:${pedido.cardapioItens}">
+                    <span th:text="${cardapioItem.nome}"></span>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                <b>Estado: </b>
-                <span th:text="${pedido.bairro.municipio.estado.nome}"></span>
+                <b>Observação: </b>
+                <span th:text="${pedido.observacao}"></span>
             </div>
             <div class="col-3">
-                <b>Município: </b>
-                <span th:text="${pedido.bairro.municipio.nome}"></span>
-            </div>
-            <div class="col-6">
-                <b>Bairro: </b>
-                <span th:text="${pedido.bairro.nome}"></span>
+                <b>Data: </b>
+                <span th:text="${pedido.data}"></span>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                <b>Valor: </b>
-                <span th:text="${'R$ ' + pedido.valor}"></span>
+                <b>Preço Total: </b>
+                <span th:text="${'R$ ' + pedido.total}"></span>
             </div>
             <div class="col-3">
                 <b>Status: </b>
-                <span th:text="${pedido.ativo} ? 'Ativo' : 'Inativo'"></span>
+                <span th:text="${pedido.status} ? 'Confirmado' : 'Cancelado'"></span>
             </div>
             <div class="col-6"></div>
         </div>
         <br>
         <div class="row">
-            <h4>Fotos:</h4>
+            <h4>Imagens:</h4>
         </div>
-        <div class="row" th:unless="${pedido.imagens.size>0}">
-            <span>Sem fotos</span>
+        <div class="row" th:unless="${pedido.cardapioItens.imagens.size>0}">
+            <span>Sem imagens</span>
         </div>
-        <div class="row" th:if="${pedido.imagens.size>0}">
-            <div class="card card-pedido col-3" th:each="imagem:${pedido.imagens}">
+        <div class="row" th:if="${pedido.cardapioItens.imagens.size>0}">
+            <div class="card card-pedido col-3" th:each="imagem:${pedido.cardapioItens.imagens}">
                 <span class="btn-delete-image" th:id="${imagem.id}">
                     <i class="fas fa-times-circle"></i>
                 </span>
@@ -71,9 +67,9 @@
         </div>
         <div class="row add-photo">
             <form method="post" th:action="@{/imagem/armazenar-imagem}" enctype="multipart/form-data">
-                <h4 class="inline" for="file">Adicionar foto:</h4>
+                <h4 class="inline" for="file">Adicionar imagem:</h4>
                 <br>
-                <input type="hidden" name="idImovel" th:value="${pedido.id}">
+                <input type="hidden" name="idPedido" th:value="${pedido.id}">
                 <input class="form-control input-file" type="file" multiple="multiple" id="file" name="files[]"/>
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-plus"></i> Adicionar

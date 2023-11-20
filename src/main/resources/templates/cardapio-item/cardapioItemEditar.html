@@ -9,7 +9,7 @@
 <body>
 <section layout:fragment="content" class="margem">
     <h3 class="inline">Editar Item Cardápio</h3>
-    <a class="btn btn-default voltar" th:href="@{/cardapio/cardapio-items}">
+    <a class="btn btn-default voltar" th:href="@{/cardapio/cardapio-itens}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
     <form th:action="@{/cardapio/cardapio-item/editar}" method="post" th:object="${cardapioItem}" enctype="multipart/form-data">

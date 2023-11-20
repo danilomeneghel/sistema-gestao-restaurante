@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         ],
         ajax: {
-            url: '/api/cardapio/cardapio-items',
+            url: '/api/cardapio/cardapio-itens',
             type: 'GET',
             datatype: 'json',
             dataSrc: ''

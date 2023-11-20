@@ -55,9 +55,9 @@ public class ApiCardapioController {
         return new ResponseEntity<>(cardapioService.findCardapioByNome(pesquisa), HttpStatus.OK);
     }
 
-    @GetMapping("/cardapio-items")
-    public ResponseEntity<List<CardapioItem>> mostrarCardapioItems() {
-        return new ResponseEntity<>(cardapioItemService.findAllCardapioItems(), HttpStatus.OK);
+    @GetMapping("/cardapio-itens")
+    public ResponseEntity<List<CardapioItem>> mostrarCardapioItens() {
+        return new ResponseEntity<>(cardapioItemService.findAllCardapioItens(), HttpStatus.OK);
     }
 
     @PostMapping("/cardapio-item/cadastro")

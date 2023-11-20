@@ -4,102 +4,59 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout.html}">
 <head>
-    <title>Edição de Imóvel</title>
+    <title>Edição de Pedido</title>
 </head>
 <body>
 <section layout:fragment="content" class="margem">
-    <h3 class="inline">Editar Imóvel</h3>
+    <h3 class="inline">Editar Pedido</h3>
     <a class="btn btn-default voltar" th:href="@{/pedido/pedidos}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <div>
-        <form th:action="@{/pedido/editar}" method="post" th:object="${pedido}" enctype="multipart/form-data">
-            <div th:replace="fragments/mensagemErro"></div>
-            <div th:replace="fragments/mensagemSucesso"></div>
+    <form th:action="@{/pedido/editar}" method="post" th:object="${pedido}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
 
-            <div class="row">
-                <div class="form-item col-5" th:classappend="${erroProduto}? is-invalid">
-                    <label for="produto-select">Negócio</label>
-                    <select id="produto-select" th:field="*{produto.id}" class="form-control">
-                        <option value="" selected>Escolha o tipo de Negócio</option>
-                        <option th:each="neg:${produtos}" th:value="${neg.id}" th:text="${neg.nome}">
-                    </select>
-                </div>
-
-                <div class="form-item col-5" th:classappend="${erroCategoria}? is-invalid">
-                    <label for="categoria-select">Categoria</label>
-                    <select id="categoria-select" th:field="*{categoria.id}" class="form-control">
-                        <option value="" selected>Escolha o tipo de Categoria</option>
-                        <option th:each="cat:${categorias}" th:value="${cat.id}" th:text="${cat.nome}">
-                    </select>
-                </div>
+        <div class="row">
+            <div class="form-item col-5" th:classappend="${erroCardapioItem}? is-invalid">
+                <label for="produto-select">Itens do Cardápio</label>
+                <select id="produto-select" multiple="multiple" th:field="*{cardapioItensArray}"
+                        name="cardapioItensArray[]" class="form-control">
+                    <option th:each="car:${cardapioItens}" th:value="${car.nome}" th:text="${car.nome}"></option>
+                </select>
             </div>
 
-            <div class="row">
-                <div class="form-item col-5" th:classappend="${erroQuarto}? is-invalid">
-                    <label for="quarto-select">Quartos</label>
-                    <select id="quarto-select" th:field="*{quarto.id}" class="form-control">
-                        <option value="" selected>Escolha a quantidade de Quartos</option>
-                        <option th:selected="${q.id==idQuarto}" th:each="q:${quartos}" th:value="${q.id}" th:text="${q.descricao}">
-                    </select>
-                </div>
+            <div class="form-item" th:classappend="${#fields.hasErrors('observacao')}? is-invalid">
+                <label for="observacao">Observação</label>
+                <input class="form-control" id="observacao" th:field="*{observacao}"
+                       placeholder="Digite alguma Observação">
+            </div>
+        </div>
 
-                <div class="form-item col-5" th:classappend="${#fields.hasErrors('valor')}? is-invalid">
-                    <label for="valor">Valor</label>
-                    <input class="form-control" id="valor" th:field="*{valor}"
-                           placeholder="Digite o Valor do Imóvel">
-                </div>
+        <div class="row">
+            <div class="form-item" th:classappend="${#fields.hasErrors('total')}? is-invalid">
+                <label for="total">Preço Total</label>
+                <input class="form-control" id="total" th:field="*{total}"
+                       placeholder="Digite o Preço Total" required>
             </div>
 
-            <div class="row">
-                <div class="form-item col-3" th:classappend="${erroEstado}? is-invalid">
-                    <label for="estado-select">Estado</label>
-                    <select id="estado-select" class="form-control" name="idEstado">
-                        <option value="" selected>Escolha o Estado</option>
-                        <option th:selected="${e.id==idEstado}" th:each="e:${estados}" th:value="${e.id}"
-                                th:text="${e.nome}">
-                    </select>
-                </div>
-
-                <div class="form-item col-4" id="municipio-div" th:styleappend="${idEstado}?'': 'display:none'"
-                     th:classappend="${erroMunicipio}? is-invalid">
-                    <label for="municipio-select">Município</label>
-                    <select id="municipio-select" class="form-control" name="idMunicipio">
-                        <option value="" selected>Escolha o Município</option>
-                        <option th:selected="${m.id==idMunicipio}" th:each="m:${municipios}" th:value="${m.id}"
-                                th:text="${m.nome}">
-                    </select>
-                </div>
-
-                <div class="form-item col-3" id="bairro-div"
-                     th:styleappend="${idMunicipio} and ${idEstado}?'': 'display:none'"
-                     th:classappend="${erroBairro}? is-invalid">
-                    <label for="bairro-select">Bairro</label>
-                    <select id="bairro-select" th:field="*{bairro.id}" class="form-control">
-                        <option value="" selected>Escolha o Bairro</option>
-                        <option th:selected="${b.id==idBairro}" th:each="b:${bairros}" th:value="${b.id}" th:text="${b.nome}">
-                    </select>
-                </div>
-
-                <div class="form-item col-5" th:classappend="${erroAtivo}? is-invalid">
-                    <label for="ativo-select">Status</label>
-                    <select id="ativo-select" class="form-control" th:field="*{ativo}">
-                        <option th:value="1" >Ativo</option>
-                        <option th:value="0" >Inativo</option>
-                    </select>
-                </div>
+            <div class="form-item" th:classappend="${#fields.hasErrors('data')}? is-invalid">
+                <label for="data">Data</label>
+                <input class="form-control" type="date" id="data" th:field="*{data}"
+                       placeholder="Digite a Data" required>
             </div>
-            <div class="add-photo">
-                <label for="file">Foto:</label>
-                <input class="form-control input-file" type="file" multiple="multiple" id="file" name="files[]"/>
+
+            <div class="form-item col-5" th:classappend="${erroStatus}? is-invalid">
+                <label for="status-select">Status</label>
+                <select id="status-select" class="form-control" th:field="*{status}">
+                    <option th:value="1">Confirmado</option>
+                    <option th:value="0">Cancelado</option>
+                </select>
             </div>
-            <br><br>
-            <input type="hidden" th:field="*{id}"/>
-            <button type="submit" class="btn btn-success">
-                <i class="fas fa-save"></i> Salvar
-            </button>
-        </form>
-    </div>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
 </section>
 </body>
 </html>

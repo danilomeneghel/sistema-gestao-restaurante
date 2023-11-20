@@ -1,12 +1,14 @@
 package restaurante.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -16,13 +18,16 @@ public class Pedido {
 
     private Long id;
 
-    private CardapioItem cardapioItem;
+    private List<CardapioItem> cardapioItens;
+
+    private String[] cardapioItensArray;
 
     private String observacao;
 
     private BigDecimal total;
 
-    private LocalDateTime data;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate data;
 
     private boolean status;
 

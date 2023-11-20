@@ -1,14 +1,16 @@
-<div class="card-pedido col-card-pedido bg-card" th:each="pedido:${restaurante}">
+<div class="card-pedido col-card-pedido bg-card" th:each="pedido:${pedido}">
             <span th:unless="${pedido.imagens.size>0}">
-                <img class="card-img-pedido-home" th:src="@{/images/restaurante.png}" alt="Restaurante">
+                <img class="card-img-pedido-home" th:src="@{/images/pedido.png}" alt="Pedido">
             </span>
     <a th:if="${pedido.imagens.size>0}" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
         <img class="card-img-pedido-home" th:src="@{${'/imagem/'+pedido.imagens[0].file}}">
     </a>
     <div class="card-body text-white">
-        <h5 th:text="${pedido.produto.nome+' ('+pedido.categoria.nome+')'}"></h5>
-        <p th:text="${pedido.bairro.municipio.nome+'/'+pedido.bairro.municipio.estado.uf}"></p>
-        <p th:inline="text">R$ [[${#numbers.formatDecimal(pedido.valor, 0, 'COMMA', 2, 'POINT')}]]</p>
+        <div th:each="cardapioItens:${pedido.cardapioItens}">
+            <h5 th:text="${cardapioItens.categoria.nome}"></h5>
+        </div>
+        <p th:text="${pedido.data}"></p>
+        <p th:inline="text">R$ [[${#numbers.formatDecimal(pedido.total, 0, 'COMMA', 2, 'POINT')}]]</p>
         <a class="text-white" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
             Mais detalhes ></a>
     </div>

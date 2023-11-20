@@ -27,9 +27,9 @@ public class CardapioItemService implements CardapioItemMapper {
 
     private ModelMapper modelMapper = new ModelMapper();
 
-    public List<CardapioItem> findAllCardapioItems() {
-        List<CardapioItemEntity> cardapioItems = cardapioItemRepository.findAll();
-        return cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
+    public List<CardapioItem> findAllCardapioItens() {
+        List<CardapioItemEntity> cardapioItens = cardapioItemRepository.findAll();
+        return cardapioItens.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
     }
 
     public CardapioItem findCardapioItemById(Long id) {
@@ -46,9 +46,9 @@ public class CardapioItemService implements CardapioItemMapper {
 
     public List<CardapioItem> findCardapioItemByCategoria(Categoria categoria) {
         CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
-        List<CardapioItemEntity> cardapioItems = cardapioItemRepository.findByCategoria(categoriaEntity);
-        if (!cardapioItems.isEmpty()) {
-            cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
+        List<CardapioItemEntity> cardapioItens = cardapioItemRepository.findByCategoria(categoriaEntity);
+        if (!cardapioItens.isEmpty()) {
+            cardapioItens.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
         }
         return null;
     }
@@ -69,8 +69,8 @@ public class CardapioItemService implements CardapioItemMapper {
     }
 
     public List<CardapioItem> findCardapioItemByNome(String nome) {
-        List<CardapioItemEntity> cardapioItems = cardapioItemRepository.findByNomeContainingIgnoreCase(nome);
-        return cardapioItems.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
+        List<CardapioItemEntity> cardapioItens = cardapioItemRepository.findByNomeContainingIgnoreCase(nome);
+        return cardapioItens.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
     }
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import restaurante.model.CardapioItem;
 import restaurante.model.Categoria;
 import restaurante.model.Pedido;
+import restaurante.service.CardapioItemService;
 import restaurante.service.CategoriaService;
 import restaurante.service.PedidoService;
 
@@ -28,6 +29,9 @@ public class PedidoController {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private CardapioItemService cardapioItemService;
 
     @GetMapping("/pedidos-confirmados")
     public ModelAndView homePedidosUsuario() {
@@ -62,9 +66,11 @@ public class PedidoController {
         ModelAndView mv = new ModelAndView("pedido/pedidoCadastro");
 
         List<Categoria> categorias = categoriaService.findAllCategorias();
+        List<CardapioItem> cardapioItens = cardapioItemService.findAllCardapioItens();
 
         addObj(mv);
         mv.addObject("categorias", categorias);
+        mv.addObject("cardapioItens", cardapioItens);
         mv.addObject("pedido", new Pedido());
         return mv;
     }
@@ -75,11 +81,11 @@ public class PedidoController {
         addObj(mv);
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
-        CardapioItem cardapioItem = pedido.getCardapioItem();
+        List<CardapioItem> cardapioItens = pedido.getCardapioItens();
 
-        if (cardapioItem != null) {
-            customMessage.add("O Item de Cardápio selecionado deve ser válido.");
-            mv.addObject("erroCardapio", true);
+        if (!cardapioItens.isEmpty()) {
+            customMessage.add("Selecione um Item de Cardápio.");
+            mv.addObject("erroCardapioItens", true);
             erro = true;
         }
 
@@ -100,11 +106,11 @@ public class PedidoController {
         ModelAndView mv = new ModelAndView("pedido/pedidoEditar");
 
         Pedido pedido = pedidoService.findPedidoById(id);
-        CardapioItem cardapioItem = pedido.getCardapioItem();
+        List<CardapioItem> cardapioItens = pedido.getCardapioItens();
 
         addObj(mv);
         mv.addObject("pedido", pedido);
-        mv.addObject("cardapioItem", cardapioItem);
+        mv.addObject("cardapioItens", cardapioItens);
         return mv;
     }
 
@@ -115,11 +121,11 @@ public class PedidoController {
         addObj(mv);
 
         List<String> customMessage = new ArrayList<String>();
-        CardapioItem cardapioItem = pedido.getCardapioItem();
+        List<CardapioItem> cardapioItens = pedido.getCardapioItens();
 
-        if (cardapioItem != null) {
-            customMessage.add("O Item do Cardápio selecionado deve ser válido.");
-            mv.addObject("erroCardapioItem", true);
+        if (!cardapioItens.isEmpty()) {
+            customMessage.add("Selecione um Item de Cardápio.");
+            mv.addObject("erroCardapioItens", true);
             erro = true;
         }
         if (errors.hasErrors() || erro) {
