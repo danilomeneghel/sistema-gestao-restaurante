@@ -1,6 +1,7 @@
 package restaurante.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "cardapio_item")
-@Data
+@Getter
+@Setter
 public class CardapioItemEntity {
 
     @Id

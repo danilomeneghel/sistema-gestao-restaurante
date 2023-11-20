@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import restaurante.entity.CardapioItemEntity;
 import restaurante.entity.CategoriaEntity;
+import restaurante.mapper.CardapioItemMapper;
+import restaurante.model.Cardapio;
 import restaurante.model.CardapioItem;
 import restaurante.model.Categoria;
+import restaurante.model.Imagem;
 import restaurante.repository.CardapioItemRepository;
 
 import java.util.List;
@@ -14,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CardapioItemService {
+public class CardapioItemService implements CardapioItemMapper {
 
     @Autowired
     private CardapioItemRepository cardapioItemRepository;
@@ -32,7 +35,11 @@ public class CardapioItemService {
     public CardapioItem findCardapioItemById(Long id) {
         Optional<CardapioItemEntity> cardapioItemEntity = cardapioItemRepository.findById(id);
         if (!cardapioItemEntity.isEmpty()) {
-            return modelMapper.map(cardapioItemEntity, CardapioItem.class);
+            Categoria categoria = modelMapper.map(cardapioItemEntity.get().getCategoria(), Categoria.class);
+            Cardapio cardapio = modelMapper.map(cardapioItemEntity.get().getCardapio(), Cardapio.class);
+            List<Imagem> imagens = cardapioItemEntity.get().getImagens().stream().map(entity -> modelMapper.map(entity, Imagem.class)).collect(Collectors.toList());
+            CardapioItem cardapioItem = CardapioItemMapper.setCardapioItem(cardapioItemEntity.get(), categoria, cardapio, imagens);
+            return cardapioItem;
         }
         return null;
     }
