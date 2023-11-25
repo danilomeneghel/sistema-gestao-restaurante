@@ -35,8 +35,11 @@ public class PedidoService {
             StringBuilder cardapioItens = new StringBuilder();
             for (CardapioItem cardapioItem : pedido.getCardapioItens()) {
                 cardapioItens.append(cardapioItem.getNome()).append(", ");
-                pedido.setCardapioItensString(cardapioItens.toString());
             }
+            if (cardapioItens.length() > 0) {
+                cardapioItens.delete(cardapioItens.length() - 2, cardapioItens.length());
+            }
+            pedido.setCardapioItensString(cardapioItens.toString());
         }
         return pedidos;
     }
