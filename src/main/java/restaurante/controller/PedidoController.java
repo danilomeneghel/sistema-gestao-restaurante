@@ -81,9 +81,8 @@ public class PedidoController {
         addObj(mv);
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
-        List<CardapioItem> cardapioItens = pedido.getCardapioItens();
 
-        if (!cardapioItens.isEmpty()) {
+        if (pedido.getCardapioItensArray() == null) {
             customMessage.add("Selecione um Item de Cardápio.");
             mv.addObject("erroCardapioItens", true);
             erro = true;

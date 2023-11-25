@@ -337,6 +337,11 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
     margin-bottom: 5px !important;
 }
 
+#data-table_wrapper .btn-group {
+    width: 100% !important;
+    border: none !important;
+}
+
 #data-table_filter {
     text-align: right !important;
 }

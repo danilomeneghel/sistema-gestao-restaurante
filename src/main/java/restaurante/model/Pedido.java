@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,11 +23,13 @@ public class Pedido {
 
     private String[] cardapioItensArray;
 
+    private String cardapioItensString;
+
     private String observacao;
 
     private BigDecimal total;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
 
     private boolean status;

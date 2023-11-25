@@ -116,7 +116,7 @@ $(document).ready(function () {
         },
         columns: [
             { "data": "id" },
-            { "data": "cardapioItens[0].nome" },
+            { "data": "cardapioItensString" },
             {
                 "data": "total", "render": function ( data ) {
                     return "R$" + data;

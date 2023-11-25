@@ -43,8 +43,4 @@ public class CardapioItemEntity {
     @OneToMany(mappedBy = "cardapioItem", cascade = CascadeType.REMOVE)
     private List<ImagemEntity> imagens;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_pedido", nullable = false)
-    private PedidoEntity pedido;
-
 }

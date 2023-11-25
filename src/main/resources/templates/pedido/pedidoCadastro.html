@@ -18,8 +18,8 @@
 
         <div class="row">
             <div class="form-item col-5" th:classappend="${erroCardapioItens}? is-invalid">
-                <label for="produto-select">Itens do Cardápio</label>
-                <select id="produto-select" multiple="multiple" th:field="*{cardapioItensArray}"
+                <label for="cardapio-item-select">Itens do Cardápio</label>
+                <select id="cardapio-item-select" multiple="multiple" th:field="*{cardapioItensArray}"
                         name="cardapioItensArray[]" class="form-control">
                     <option th:each="car:${cardapioItens}" th:value="${car.nome}" th:text="${car.nome}"></option>
                 </select>
@@ -48,8 +48,8 @@
             <div class="form-item col-5" th:classappend="${erroStatus}? is-invalid">
                 <label for="status-select">Status</label>
                 <select id="status-select" class="form-control" th:field="*{status}">
-                    <option th:value="1">Confirmado</option>
                     <option th:value="0">Cancelado</option>
+                    <option th:value="1">Confirmado</option>
                 </select>
             </div>
         </div>
@@ -58,5 +58,8 @@
         </button>
     </form>
 </section>
+<th:block layout:fragment="script">
+    <script src="/js/multiselect-cardapio-item.js"></script>
+</th:block>
 </body>
 </html>

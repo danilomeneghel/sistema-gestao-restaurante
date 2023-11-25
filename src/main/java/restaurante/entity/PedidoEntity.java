@@ -1,12 +1,14 @@
 package restaurante.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +21,12 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "pedido")
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_item",
+            joinColumns = @JoinColumn(name = "id_pedido"),
+            inverseJoinColumns = @JoinColumn(name = "id_cardapio_item")
+    )
     private List<CardapioItemEntity> cardapioItens;
 
     private String observacao;
@@ -29,7 +36,8 @@ public class PedidoEntity {
     @DecimalMax(value = "99999999.99", message = "O total não pode ser maior que R$10000000.00")
     private BigDecimal total;
 
-    private LocalDateTime data;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate data;
 
     private boolean status;
 
