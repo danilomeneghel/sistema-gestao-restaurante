@@ -16,11 +16,20 @@
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+        <div class="form-item col-6" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
             <label for="nome">Produto</label>
             <input class="form-control" id="nome" th:field="*{nome}"
-                   placeholder="Digite o nome do Produto" required>
+                   placeholder="Digite o Nome do Produto" required>
         </div>
+
+        <div class="form-item col-6" th:classappend="${erroFornecedor}? is-invalid">
+            <label for="fornecedor-select">Fornecedor</label>
+            <select id="fornecedor-select" th:field="*{fornecedor.id}" class="form-control">
+                <option value="" selected>Escolha o Fornecedor</option>
+                <option th:each="for:${fornecedores}" th:value="${for.id}" th:text="${for.nome}">
+            </select>
+        </div>
+
         <input type="hidden" th:field="*{id}">
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Salvar

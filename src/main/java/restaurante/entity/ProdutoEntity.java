@@ -17,4 +17,8 @@ public class ProdutoEntity {
     @NotBlank(message = "O nome do produto não pode estar em branco.")
     private String nome;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_fornecedor")
+    private FornecedorEntity fornecedor;
+
 }

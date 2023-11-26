@@ -8,12 +8,32 @@
     <div class="row">
         <div class="card col-card bg-card">
             <div class="card-icon">
+                <a th:href="@{/estabelecimento/estabelecimentos}">
+                    <i class="fas fa-folder-open fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/estabelecimento/estabelecimentos}">ESTABELECIMENTOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
                 <a th:href="@{/categoria/categorias}">
                     <i class="fas fa-folder-open fa-fw fa-4x padding-y-3xs"></i>
                 </a>
             </div>
             <div class="card-text text-right">
                 <a class="text-white" th:href="@{/categoria/categorias}">CATEGORIAS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/fornecedor/fornecedores}">
+                    <i class="fas fa-folder-open fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/fornecedor/fornecedores}">FORNECEDORES ></a>
             </div>
         </div>
         <div class="card col-card bg-card">
@@ -38,6 +58,16 @@
         </div>
         <div class="card col-card bg-card">
             <div class="card-icon">
+                <a th:href="@{/cardapio/cardapio-itens}">
+                    <i class="fas fa-newspaper fa-fw fa-4x padding-y-3xs" style="font-weight: 100 !important"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/cardapio/cardapio-itens}"> CARDÁPIO ITENS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
                 <a th:href="@{/pedido/pedidos}">
                     <i class="fas fa-edit fa-fw fa-4x padding-y-3xs"></i>
                 </a>
@@ -54,36 +84,6 @@
             </div>
             <div class="card-text text-right">
                 <a class="text-white" th:href="@{/pedido/pedidos-confirmados}" target="_blank"> PEDIDOS DISPONÍVEIS ></a>
-            </div>
-        </div>
-        <div class="card col-card bg-card">
-            <div class="card-icon">
-                <a th:href="@{/localidade/estados}">
-                    <i class="fas fa-map fa-fw fa-4x padding-y-3xs"></i>
-                </a>
-            </div>
-            <div class="card-text text-right">
-                <a class="text-white" th:href="@{/localidade/estados}">ESTADOS ></a>
-            </div>
-        </div>
-        <div class="card col-card bg-card">
-            <div class="card-icon">
-                <a th:href="@{/localidade/municipios}">
-                    <i class="fas fa-map-signs fa-fw fa-4x padding-y-3xs"></i>
-                </a>
-            </div>
-            <div class="card-text text-right">
-                <a class="text-white" th:href="@{/localidade/municipios}">MUNICÍPIOS ></a>
-            </div>
-        </div>
-        <div class="card col-card bg-card">
-            <div class="card-icon">
-                <a th:href="@{/localidade/bairros}">
-                    <i class="fas fa-map-pin fa-fw fa-4x padding-y-3xs"></i>
-                </a>
-            </div>
-            <div class="card-text text-right">
-                <a class="text-white" th:href="@{/localidade/bairros}">BAIRROS ></a>
             </div>
         </div>
     </div>

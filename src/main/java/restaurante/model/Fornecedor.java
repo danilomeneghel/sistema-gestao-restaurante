@@ -9,20 +9,24 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario {
+public class Fornecedor {
 
     private Long id;
 
-    private boolean active;
+    private boolean ativo;
 
-    private String name;
+    private String nome;
 
     private String email;
 
-    private String username;
+    private String telefone;
 
-    private String password;
+    private String rua;
 
-    private String roles;
+    private Bairro bairro;
+
+    private Municipio municipio;
+
+    private Estado estado;
 
 }

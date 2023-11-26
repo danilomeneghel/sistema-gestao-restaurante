@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Cadastro de Estabelecimento</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Novo Estabelecimento</h3>
+    <a class="btn btn-default voltar" th:href="@{/estabelecimento/estabelecimentos}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/estabelecimento/cadastrar}" method="post" th:object="${estabelecimento}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+        <div class="row">
+            <div class="form-item col-6" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+                <label for="nome">Nome</label>
+                <input class="form-control" id="nome" th:field="*{nome}"
+                       placeholder="Digite o Nome do Estabelecimento" required>
+            </div>
+            <div class="form-item col-6" th:classappend="${#fields.hasErrors('email')}? is-invalid">
+                <label for="email">E-mail</label>
+                <input class="form-control" id="email" th:field="*{email}"
+                       placeholder="Digite o E-mail" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-item col-6" th:classappend="${#fields.hasErrors('telefone')}? is-invalid">
+                <label for="telefone">Telefone</label>
+                <input class="form-control" id="telefone" th:field="*{telefone}"
+                       placeholder="Digite o Telefone" required>
+            </div>
+            <div class="form-item col-6" th:classappend="${#fields.hasErrors('rua')}? is-invalid">
+                <label for="rua">Rua</label>
+                <input class="form-control" id="rua" th:field="*{rua}"
+                       placeholder="Digite a Rua" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-item col-3" th:classappend="${erroEstado}? is-invalid">
+                <label for="estado-select">Estado</label>
+                <select id="estado-select" name="idEstado" class="form-control">
+                    <option value="" selected>Escolha o Estado</option>
+                    <option th:selected="${e.id==idEstado}" th:each="e:${estados}" th:value="${e.id}"
+                            th:text="${e.nome}">
+                </select>
+            </div>
+
+            <div class="form-item col-4" id="municipio-div" th:styleappend="${idEstado}?'': 'display:none'"
+                 th:classappend="${erroMunicipio}? is-invalid">
+                <label for="municipio-select">Município</label>
+                <select id="municipio-select" name="idMunicipio" class="form-control">
+                    <option value="" selected>Escolha o Município</option>
+                    <option th:selected="${m.id==idMunicipio}" th:each="m:${municipios}" th:value="${m.id}"
+                            th:text="${m.nome}">
+                </select>
+            </div>
+
+            <div class="form-item col-3" id="bairro-div"
+                 th:styleappend="${idMunicipio} and ${idEstado}?'': 'display:none'"
+                 th:classappend="${erroBairro}? is-invalid">
+                <label for="bairro-select">Bairro</label>
+                <select id="bairro-select" th:field="*{bairro.id}" class="form-control">
+                    <option value="" selected>Escolha o Bairro</option>
+                    <option th:each="b:${bairros}" th:value="${b.id}" th:text="${b.nome}">
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-item col-5" th:classappend="${erroAtivo}? is-invalid">
+                <label for="ativo-select">Status</label>
+                <select id="ativo-select" class="form-control" th:field="*{ativo}">
+                    <option th:value="1">Ativo</option>
+                    <option th:value="0">Inativo</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+</body>
+</html>

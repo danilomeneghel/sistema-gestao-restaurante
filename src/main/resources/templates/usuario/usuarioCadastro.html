@@ -18,7 +18,7 @@
         <div class="form-item" th:classappend="${#fields.hasErrors('name')}? is-invalid">
             <label for="name">Nome</label>
             <input class="form-control" id="name" th:field="*{name}"
-                   placeholder="Digite o nome da Usuario" required>
+                   placeholder="Digite o Nome" required>
         </div>
         <div class="form-item" th:classappend="${#fields.hasErrors('email')}? is-invalid">
             <label for="email">E-mail</label>

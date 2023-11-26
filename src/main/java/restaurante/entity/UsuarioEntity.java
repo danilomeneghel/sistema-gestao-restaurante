@@ -14,6 +14,8 @@ public class UsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private boolean active;
+
     @NotBlank(message = "O nome não pode estar em branco.")
     private String name;
 
@@ -25,8 +27,6 @@ public class UsuarioEntity {
 
     @NotBlank(message = "A senha não pode estar em branco.")
     private String password;
-
-    private boolean active;
 
     private String roles;
 

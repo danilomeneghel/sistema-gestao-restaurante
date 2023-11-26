@@ -16,7 +16,7 @@
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+        <div class="form-item col-6" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
             <label for="nome">Categoria</label>
             <input class="form-control" id="nome" th:field="*{nome}"
                    placeholder="Digite o nome da Categoria" required>

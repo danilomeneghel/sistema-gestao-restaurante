@@ -15,4 +15,6 @@ public class Produto {
 
     private String nome;
 
+    private Fornecedor fornecedor;
+
 }

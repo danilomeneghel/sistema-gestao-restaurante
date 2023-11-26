@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cardapio")
-@Tag(name = "Cardapio")
+@Tag(name = "Cardápio")
 @Validated
 public class ApiCardapioController {
 
