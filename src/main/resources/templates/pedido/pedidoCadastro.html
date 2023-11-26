@@ -16,42 +16,38 @@
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="row">
-            <div class="form-item col-5" th:classappend="${erroCardapioItens}? is-invalid">
-                <label for="cardapio-item-select">Itens do Cardápio</label>
-                <select id="cardapio-item-select" multiple="multiple" th:field="*{cardapioItensArray}"
-                        name="cardapioItensArray[]" class="form-control">
-                    <option th:each="car:${cardapioItens}" th:value="${car.nome}" th:text="${car.nome}"></option>
-                </select>
-            </div>
-
-            <div class="form-item" th:classappend="${#fields.hasErrors('observacao')}? is-invalid">
-                <label for="observacao">Observação</label>
-                <input class="form-control" id="observacao" th:field="*{observacao}"
-                       placeholder="Digite alguma Observação">
-            </div>
+        <div class="form-item col-8" th:classappend="${erroCardapioItens}? is-invalid">
+            <label for="cardapio-item-select">Itens do Cardápio</label>
+            <select id="cardapio-item-select" multiple="multiple" th:field="*{cardapioItensArray}"
+                    name="cardapioItensArray[]" class="form-control">
+                <option th:each="car:${cardapioItens}" th:value="${car.nome}" th:text="${car.nome}"></option>
+            </select>
         </div>
 
-        <div class="row">
-            <div class="form-item" th:classappend="${#fields.hasErrors('total')}? is-invalid">
-                <label for="total">Preço Total</label>
-                <input class="form-control" id="total" th:field="*{total}"
-                       placeholder="Digite o Preço Total" required>
-            </div>
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('observacao')}? is-invalid">
+            <label for="observacao">Observação</label>
+            <input class="form-control" id="observacao" th:field="*{observacao}"
+                   placeholder="Digite alguma Observação">
+        </div>
 
-            <div class="form-item" th:classappend="${#fields.hasErrors('data')}? is-invalid">
-                <label for="data">Data</label>
-                <input class="form-control" type="date" id="data" th:field="*{data}"
-                       placeholder="Digite a Data" required>
-            </div>
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('total')}? is-invalid">
+            <label for="total">Preço Total</label>
+            <input class="form-control" id="total" th:field="*{total}"
+                   placeholder="Digite o Preço Total" required>
+        </div>
 
-            <div class="form-item col-5" th:classappend="${erroStatus}? is-invalid">
-                <label for="status-select">Status</label>
-                <select id="status-select" class="form-control" th:field="*{status}">
-                    <option th:value="0">Cancelado</option>
-                    <option th:value="1">Confirmado</option>
-                </select>
-            </div>
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('data')}? is-invalid">
+            <label for="data">Data</label>
+            <input class="form-control" type="date" id="data" th:field="*{data}"
+                   placeholder="Digite a Data" required>
+        </div>
+
+        <div class="form-item col-8" th:classappend="${erroStatus}? is-invalid">
+            <label for="status-select">Status</label>
+            <select id="status-select" class="form-control" th:field="*{status}">
+                <option th:value="1">Confirmado</option>
+                <option th:value="0">Cancelado</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Salvar

@@ -12,11 +12,12 @@
     <a class="btn btn-default voltar" th:href="@{/cardapio/cardapio-itens}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
-    <form th:action="@{/cardapio/cardapio-item/editar}" method="post" th:object="${cardapioItem}" enctype="multipart/form-data">
+    <form th:action="@{/cardapio/cardapio-item/editar}" method="post" th:object="${cardapioItem}"
+          enctype="multipart/form-data">
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="form-item col-5" th:classappend="${erroCategoria}? is-invalid">
+        <div class="form-item col-8" th:classappend="${erroCategoria}? is-invalid">
             <label for="categoria-select">Categoria</label>
             <select id="categoria-select" th:field="*{categoria.id}" class="form-control">
                 <option value="" selected>Escolha a Categoria</option>
@@ -24,7 +25,7 @@
             </select>
         </div>
 
-        <div class="form-item col-5" th:classappend="${erroCardapio}? is-invalid">
+        <div class="form-item col-8" th:classappend="${erroCardapio}? is-invalid">
             <label for="cardapio-select">Cardápio</label>
             <select id="cardapio-select" th:field="*{cardapio.id}" class="form-control">
                 <option value="" selected>Escolha o Cardápio</option>
@@ -32,26 +33,26 @@
             </select>
         </div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
-            <label for="nome">Nome do Item</label>
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('nome')}? is-invalid">
+            <label for="nome">Item do Cardápio</label>
             <input class="form-control" id="nome" th:field="*{nome}"
                    placeholder="Digite o nome do Item" required>
         </div>
 
-        <div class="form-item col-5" th:classappend="${erroProduto}? is-invalid">
+        <div class="form-item col-8" th:classappend="${erroProduto}? is-invalid">
             <label for="produto-select">Produtos (Ingredientes)</label>
             <select id="produto-select" multiple="multiple" th:field="*{produtos}" name="produtos" class="form-control">
                 <option th:each="pro:${produtos}" th:value="${pro.nome}" th:text="${pro.nome}"></option>
             </select>
         </div>
 
-        <div class="form-item" th:classappend="${#fields.hasErrors('preco')}? is-invalid">
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('preco')}? is-invalid">
             <label for="preco">Preço</label>
             <input class="form-control" id="preco" th:field="*{preco}"
                    placeholder="Digite o Preço" required>
         </div>
 
-        <div class="add-photo">
+        <div class="add-photo col-8">
             <label for="file">Imagem:</label>
             <input class="form-control input-file" type="file" multiple="multiple" id="file" name="files[]"/>
         </div>
