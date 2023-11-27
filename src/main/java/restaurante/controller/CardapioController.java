@@ -140,14 +140,6 @@ public class CardapioController {
         return mv;
     }
 
-    @GetMapping("/cardapio-item/visualizar/{id}")
-    public ModelAndView visualizarPedido(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemVisualizar");
-        CardapioItem cardapioItem = cardapioItemService.findCardapioItemById(id);
-        mv.addObject("cardapioItem", cardapioItem);
-        return mv;
-    }
-
     @GetMapping("/cardapio-item/excluir/{id}")
     public ModelAndView excluirCardapioItem(@PathVariable Long id, RedirectAttributes ra) {
         CardapioItem cardapioItem = cardapioItemService.findCardapioItemById(id);
@@ -162,6 +154,14 @@ public class CardapioController {
             ra.addFlashAttribute("erro", "O Item do Cardápio não foi encontrado.");
         }
         return new ModelAndView("redirect:/cardapio-item/cardapioItens");
+    }
+
+    @GetMapping("/cardapio-item/visualizar/{id}")
+    public ModelAndView visualizarCardapioItem(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("cardapio-item/cardapioItemVisualizar");
+        CardapioItem cardapioItem = cardapioItemService.findCardapioItemById(id);
+        mv.addObject("cardapioItem", cardapioItem);
+        return mv;
     }
 
 }

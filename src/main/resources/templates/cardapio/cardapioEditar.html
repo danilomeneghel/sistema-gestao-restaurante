@@ -22,14 +22,6 @@
                    placeholder="Digite o Nome do Cardápio" required>
         </div>
 
-        <div class="form-item col-6" th:classappend="${erroEstabelecimento}? is-invalid">
-            <label for="estabelecimento-select">Estabelecimento</label>
-            <select id="estabelecimento-select" th:field="*{estabelecimento.id}" class="form-control">
-                <option value="" selected>Escolha o Estabelecimento</option>
-                <option th:each="est:${estabelecimentos}" th:value="${est.id}" th:text="${est.nome}">
-            </select>
-        </div>
-
         <input type="hidden" th:field="*{id}">
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save"></i> Salvar

@@ -12,9 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import restaurante.model.CardapioItem;
 import restaurante.model.Categoria;
+import restaurante.model.Estabelecimento;
 import restaurante.model.Pedido;
 import restaurante.service.CardapioItemService;
 import restaurante.service.CategoriaService;
+import restaurante.service.EstabelecimentoService;
 import restaurante.service.PedidoService;
 
 import java.util.ArrayList;
@@ -32,6 +34,9 @@ public class PedidoController {
 
     @Autowired
     private CardapioItemService cardapioItemService;
+
+    @Autowired
+    private EstabelecimentoService estabelecimentoService;
 
     @GetMapping("/pedidos-confirmados")
     public ModelAndView homePedidosUsuario() {
@@ -65,13 +70,15 @@ public class PedidoController {
     public ModelAndView cadastroPedido() {
         ModelAndView mv = new ModelAndView("pedido/pedidoCadastro");
 
+        List<Estabelecimento> estabelecimentos = estabelecimentoService.findAllEstabelecimentos();
         List<Categoria> categorias = categoriaService.findAllCategorias();
         List<CardapioItem> cardapioItens = cardapioItemService.findAllCardapioItens();
 
         addObj(mv);
+        mv.addObject("pedido", new Pedido());
+        mv.addObject("estabelecimentos", estabelecimentos);
         mv.addObject("categorias", categorias);
         mv.addObject("cardapioItens", cardapioItens);
-        mv.addObject("pedido", new Pedido());
         return mv;
     }
 
@@ -105,10 +112,14 @@ public class PedidoController {
         ModelAndView mv = new ModelAndView("pedido/pedidoEditar");
 
         Pedido pedido = pedidoService.findPedidoById(id);
-        List<CardapioItem> cardapioItens = pedido.getCardapioItens();
+        List<Estabelecimento> estabelecimentos = estabelecimentoService.findAllEstabelecimentos();
+        List<Categoria> categorias = categoriaService.findAllCategorias();
+        List<CardapioItem> cardapioItens = cardapioItemService.findAllCardapioItens();
 
         addObj(mv);
         mv.addObject("pedido", pedido);
+        mv.addObject("estabelecimentos", estabelecimentos);
+        mv.addObject("categorias", categorias);
         mv.addObject("cardapioItens", cardapioItens);
         return mv;
     }
@@ -146,6 +157,22 @@ public class PedidoController {
             ra.addFlashAttribute("erro", "O Pedido não foi encontrado.");
         }
         return new ModelAndView("redirect:/pedido/pedidos");
+    }
+
+    @GetMapping("/visualizar/pedido-usuario/{id}")
+    public ModelAndView visualizarPedidoUsuario(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("pedido/pedidoVisualizarUsuario");
+        Pedido pedido = pedidoService.findPedidoById(id);
+        mv.addObject("pedido", pedido);
+        return mv;
+    }
+
+    @GetMapping("/visualizar/{id}")
+    public ModelAndView visualizarPedido(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("pedido/pedidoVisualizar");
+        Pedido pedido = pedidoService.findPedidoById(id);
+        mv.addObject("pedido", pedido);
+        return mv;
     }
 
     private void addObj(ModelAndView mv) {

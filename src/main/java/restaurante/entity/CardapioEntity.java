@@ -17,8 +17,4 @@ public class CardapioEntity {
     @NotBlank(message = "O nome do cardápio não pode estar em branco.")
     private String nome;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estabelecimento")
-    private EstabelecimentoEntity estabelecimento;
-
 }

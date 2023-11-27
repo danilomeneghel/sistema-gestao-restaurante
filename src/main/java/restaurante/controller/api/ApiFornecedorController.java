@@ -20,7 +20,7 @@ public class ApiFornecedorController {
     @Autowired
     private FornecedorService fornecedorService;
 
-    @GetMapping("/fornecedors")
+    @GetMapping("/fornecedores")
     public ResponseEntity<List<Fornecedor>> mostrarFornecedores() {
         return new ResponseEntity<>(fornecedorService.findAllFornecedores(), HttpStatus.OK);
     }

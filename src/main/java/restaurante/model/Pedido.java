@@ -18,6 +18,8 @@ public class Pedido {
 
     private Long id;
 
+    private Estabelecimento estabelecimento;
+
     private List<CardapioItem> cardapioItens;
 
     private String[] cardapioItensArray;

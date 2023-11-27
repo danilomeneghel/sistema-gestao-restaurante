@@ -76,7 +76,7 @@ $(document).ready(function () {
             $("#data-table thead .filters .filter").each( function ( colIdx ) {
                 var cell = $('.filters .filter').eq($(api.column(colIdx).header()).index());
                 var title = $(cell).text();
-                if(title == 'Status' || title == 'Item Cardápio' || title == 'Categoria') {
+                if(title == 'Status' || title == 'Item Cardápio' || title == 'Estabelecimento') {
                     var select = $('<select id="'+title+'"><option value="">'+title+'</option></select>')
                     .appendTo( $(this).empty() )
                     .on( 'change', function () {
@@ -116,6 +116,7 @@ $(document).ready(function () {
         },
         columns: [
             { "data": "id" },
+            { "data": "estabelecimento.nome" },
             { "data": "cardapioItensString" },
             {
                 "data": "total", "render": function ( data ) {

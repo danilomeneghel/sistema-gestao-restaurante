@@ -20,6 +20,10 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_estabelecimento")
+    private EstabelecimentoEntity estabelecimento;
+
     @ManyToMany
     @JoinTable(
             name = "pedido_item",

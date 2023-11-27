@@ -15,6 +15,4 @@ public class Cardapio {
 
     private String nome;
 
-    private Estabelecimento estabelecimento;
-
 }
