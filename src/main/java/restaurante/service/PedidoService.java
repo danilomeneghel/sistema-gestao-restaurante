@@ -79,11 +79,8 @@ public class PedidoService {
         int qtdeItensArray = cardapioItensArray.length;
         if (qtdeItensArray > 0) {
             for (int i = 0; i < qtdeItensArray; i++) {
-                Long id = Long.valueOf(i + 1);
                 String nome = cardapioItensArray[i];
-                CardapioItem cardapioItem = new CardapioItem();
-                cardapioItem.setId(id);
-                cardapioItem.setNome(nome);
+                CardapioItem cardapioItem = cardapioItemService.findCardapioItemNome(nome);
                 cardapioItemList.add(cardapioItem);
             }
         }

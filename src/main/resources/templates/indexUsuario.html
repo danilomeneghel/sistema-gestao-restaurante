@@ -17,18 +17,18 @@
     </div>
     <div id="pedidos" class="row">
         <div class="card-pedido col-card-pedido bg-card" th:each="pedido:${pedidos}">
-            <span th:unless="${pedido.imagens.size>0}">
+            <span th:unless="${pedido.cardapioItens[0].imagens.size>0}">
                 <img class="card-img-pedido-home" th:src="@{/images/pedido.png}" alt="Pedidos">
             </span>
-            <a th:if="${pedido.imagens.size>0}" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
+            <a th:if="${pedido.cardapioItens[0].imagens.size>0}" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
                 <img class="card-img-pedido-home" th:src="@{${'/imagem/'+pedido.cardapioItens[0].imagens[0].file}}">
             </a>
             <div class="card-pedido-text text-white">
                 <h5 th:text="${pedido.cardapioItens[0].categoria.nome}"></h5>
-                <p th:text="${pedido.cardapioItens[0].nome}"></p>
-                <p th:text="${pedido.estabelecimento.nome}"></p>
+                <span th:text="${pedido.cardapioItens[0].nome}"></span><br>
+                <span th:text="${pedido.estabelecimento.nome}"></span><br>
+                <span th:text="${pedido.data}"></span><br>
                 <p th:inline="text">R$ [[${#numbers.formatDecimal(pedido.total, 0, 'COMMA', 2, 'POINT')}]]</p>
-                <p th:text="${pedido.data}"></p>
                 <a class="text-white" th:href="@{/pedido/visualizar/pedido-usuario/{id}(id=${pedido.id})}">
                     Mais detalhes ></a>
             </div>

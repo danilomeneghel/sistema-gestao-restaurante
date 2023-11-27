@@ -16,7 +16,7 @@
         <div th:replace="fragments/mensagemErro"></div>
         <div th:replace="fragments/mensagemSucesso"></div>
 
-        <div class="form-item col-6" th:classappend="${erroEstabelecimento}? is-invalid">
+        <div class="form-item col-8" th:classappend="${erroEstabelecimento}? is-invalid">
             <label for="estabelecimento-select">Estabelecimento</label>
             <select id="estabelecimento-select" th:field="*{estabelecimento.id}" class="form-control">
                 <option value="" selected>Escolha o Estabelecimento</option>

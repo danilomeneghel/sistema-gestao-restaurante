@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import restaurante.enums.Ativo;
+import restaurante.model.Bairro;
 import restaurante.model.Estabelecimento;
+import restaurante.model.Estado;
+import restaurante.model.Municipio;
 import restaurante.service.EstabelecimentoService;
+import restaurante.service.LocalidadeService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/estabelecimento")
@@ -20,6 +26,9 @@ public class EstabelecimentoController {
 
     @Autowired
     private EstabelecimentoService estabelecimentoService;
+
+    @Autowired
+    private LocalidadeService localidadeService;
 
     @GetMapping("/estabelecimentos")
     public ModelAndView mostrarEstabelecimentos() {
@@ -31,7 +40,14 @@ public class EstabelecimentoController {
     @GetMapping("/cadastro")
     public ModelAndView cadastroEstabelecimento() {
         ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoCadastro");
+        List<Bairro> bairros = localidadeService.findAllBairros();
+        List<Municipio> municipios = localidadeService.findAllMunicipios();
+        List<Estado> estados = localidadeService.findAllEstados();
+
         mv.addObject("estabelecimento", new Estabelecimento());
+        mv.addObject("bairros", bairros);
+        mv.addObject("municipios", municipios);
+        mv.addObject("estados", estados);
         mv.addObject("ativo", Ativo.values());
         return mv;
     }
@@ -52,7 +68,14 @@ public class EstabelecimentoController {
     public ModelAndView editaEstabelecimento(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoEditar");
         Estabelecimento estabelecimento = estabelecimentoService.findEstabelecimentoById(id);
+        List<Bairro> bairros = localidadeService.findAllBairros();
+        List<Municipio> municipios = localidadeService.findAllMunicipios();
+        List<Estado> estados = localidadeService.findAllEstados();
+
         mv.addObject("estabelecimento", estabelecimento);
+        mv.addObject("bairros", bairros);
+        mv.addObject("municipios", municipios);
+        mv.addObject("estados", estados);
         mv.addObject("ativo", Ativo.values());
         return mv;
     }

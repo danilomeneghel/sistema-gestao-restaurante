@@ -73,4 +73,9 @@ public class CardapioItemService implements CardapioItemMapper {
         return cardapioItens.stream().map(entity -> modelMapper.map(entity, CardapioItem.class)).collect(Collectors.toList());
     }
 
+    public CardapioItem findCardapioItemNome(String nome) {
+        CardapioItemEntity cardapioItemEntity = cardapioItemRepository.findByNome(nome);
+        return modelMapper.map(cardapioItemEntity, CardapioItem.class);
+    }
+
 }

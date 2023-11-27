@@ -106,7 +106,7 @@ body {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 19%;
     flex: 1 0 19%;
-    min-width: 19%;
+    max-width: 19%;
 }
 
 .card {
@@ -673,7 +673,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 19%;
       flex: 0 0 45%;
-      min-width: 45%;
+      max-width: 45%;
     }
 
     .input-search {

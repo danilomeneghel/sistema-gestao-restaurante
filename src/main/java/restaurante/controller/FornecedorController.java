@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import restaurante.enums.Ativo;
+import restaurante.model.Bairro;
+import restaurante.model.Estado;
 import restaurante.model.Fornecedor;
+import restaurante.model.Municipio;
 import restaurante.service.FornecedorService;
+import restaurante.service.LocalidadeService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/fornecedor")
@@ -20,6 +26,9 @@ public class FornecedorController {
 
     @Autowired
     private FornecedorService fornecedorService;
+
+    @Autowired
+    private LocalidadeService localidadeService;
 
     @GetMapping("/fornecedores")
     public ModelAndView mostrarFornecedores() {
@@ -31,7 +40,14 @@ public class FornecedorController {
     @GetMapping("/cadastro")
     public ModelAndView cadastroFornecedor() {
         ModelAndView mv = new ModelAndView("fornecedor/fornecedorCadastro");
+        List<Bairro> bairros = localidadeService.findAllBairros();
+        List<Municipio> municipios = localidadeService.findAllMunicipios();
+        List<Estado> estados = localidadeService.findAllEstados();
+
         mv.addObject("fornecedor", new Fornecedor());
+        mv.addObject("bairros", bairros);
+        mv.addObject("municipios", municipios);
+        mv.addObject("estados", estados);
         mv.addObject("ativo", Ativo.values());
         return mv;
     }
@@ -52,7 +68,14 @@ public class FornecedorController {
     public ModelAndView editaFornecedor(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("fornecedor/fornecedorEditar");
         Fornecedor fornecedor = fornecedorService.findFornecedorById(id);
+        List<Bairro> bairros = localidadeService.findAllBairros();
+        List<Municipio> municipios = localidadeService.findAllMunicipios();
+        List<Estado> estados = localidadeService.findAllEstados();
+
         mv.addObject("fornecedor", fornecedor);
+        mv.addObject("bairros", bairros);
+        mv.addObject("municipios", municipios);
+        mv.addObject("estados", estados);
         mv.addObject("ativo", Ativo.values());
         return mv;
     }

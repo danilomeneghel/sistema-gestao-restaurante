@@ -14,4 +14,4 @@ INSERT INTO `cardapio` VALUES (1,'Almoço'),(2,'Janta'),(3,'Lanche'),(4,'Café')
 
 INSERT INTO `produto` VALUES (1,'Arroz',1),(2,'Feijão',1),(3,'Massa',1),(4,'Batata Frita',1),(5,'Batata Palha',1),(6,'Carne Bovina',1),(7,'Frango',1),(8,'Peixe',1),(9,'Salada',1),(10,'Ovo',1),(11,'Guaraná Antarctica',1),(12,'Coca-cola',1),(13,'Cerveja Skol',1),(14,'Vinho Tinto',1),(15,'Xis Salada',1),(16,'Pudim',1);
 
-INSERT INTO `usuario` VALUES (1,1,'admin@admin.com','Admin','$2a$10$1HAxsgoqtXCVASxpXGcnheACN8.SbB8iQZ5o4sktAOPQEE/k2B9Ue','ROLE_ADMIN','admin'),(2,1,'jose@jose.com','jose','$2a$10$5MnLWqAPG0pMmX3JTbXV/.RZMkq8NuMmKj3FaBFi4WH1cOUSpMueK','ROLE_USER','jose'),(3,0,'bruna@bruna.com','Bruna','$2a$10$sSuo.CAGj7FQ3hCqDgwMpOtooYuB6cQgko2.vaZy8JjW/Ru5EHKHu','ROLE_USER','bruna');
+INSERT INTO `usuario` VALUES (1,1,'admin@admin.com','Admin','$2a$10$1HAxsgoqtXCVASxpXGcnheACN8.SbB8iQZ5o4sktAOPQEE/k2B9Ue','ROLE_ADMIN','admin'),(2,1,'jose@jose.com','José','$2a$10$5MnLWqAPG0pMmX3JTbXV/.RZMkq8NuMmKj3FaBFi4WH1cOUSpMueK','ROLE_USER','jose'),(3,0,'bruna@bruna.com','Bruna','$2a$10$sSuo.CAGj7FQ3hCqDgwMpOtooYuB6cQgko2.vaZy8JjW/Ru5EHKHu','ROLE_USER','bruna');

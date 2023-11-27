@@ -5,13 +5,17 @@ Sistema para gestão de restaurante desenvolvido em Java com Spring Boot e API R
 ## Módulos
 
 - Login
+- Estabelecimentos
 - Categorias
+- Fornecedores
 - Produtos
 - Cardápios
+- Itens do Cardápio
 - Estados
 - Municípios
 - Bairros
 - Pedidos
+- Pedidos Confirmados
 - Usuários
 
 ## Requisitos
@@ -104,9 +108,8 @@ Projeto licenciado sob <a href="LICENSE">The MIT License (MIT)</a>.<br><br>
 ![Screenshots](screenshots/screenshot14.png) <br><br>
 ![Screenshots](screenshots/screenshot15.png) <br><br>
 ![Screenshots](screenshots/screenshot16.png) <br><br>
-![Screenshots](screenshots/screenshot17.png) <br>
 
-* Fotos de Imóveis meramente ilustrativas.<br><br>
+* Fotos dos Itens do Cardápio meramente ilustrativas.<br><br>
 
 
 Desenvolvido por<br>
