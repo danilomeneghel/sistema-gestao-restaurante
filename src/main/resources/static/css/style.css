@@ -71,7 +71,7 @@ body {
     border-bottom: 0px !important;
     text-align: left !important;
     margin-top: 14px !important;
-    margin-left: 30px !important;
+    right: 20px !important;
 }
 
 .dropdown-menu-logout .dropdown-item {
@@ -203,6 +203,10 @@ form {
     width: 98% !important;
 }
 
+.form-control-sm {
+    font-size: .950rem !important;
+}
+
 .form-item {
     margin: 0px 0px !important;
     padding: 8px 0px !important;
@@ -282,7 +286,7 @@ form {
 }
 
 .navbar div:first-child {
-    width: 80% !important;
+    width: 60% !important;
     float: left !important;
 }
 
@@ -293,7 +297,7 @@ form {
 }
 
 .navbar div:last-child {
-    width: 20%;
+    width: 40%;
     text-align: right;
 }
 
@@ -314,7 +318,7 @@ form {
 
 div.dataTables_wrapper div.dataTables_filter input {
     margin-left: 0px !important;
-    width: 74% !important;
+    width: 100% !important;
 }
 
 div.dataTables_wrapper div.dataTables_filter i {
@@ -340,6 +344,10 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
 #data-table_wrapper .btn-group {
     width: 100% !important;
     border: none !important;
+}
+
+#data-table_length .btn-add {
+    margin-top: -4px !important;
 }
 
 #data-table_filter {
@@ -431,6 +439,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
 .buttons-pdf {
     min-width: 50px !important;
     margin-right: 3px !important;
+    color: #fff !important;
     border: 0px !important;
     border-radius: .1rem !important;
 }
@@ -438,8 +447,18 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
 .buttons-excel {
     min-width: 50px !important;
     margin-right: 3px !important;
+    color: #fff !important;
     border: 0px !important;
     border-radius: .1rem !important;
+}
+
+.buttons-csv {
+    min-width: 50px !important;
+    margin-right: 3px !important;
+    color: #fff !important;
+    border: 0px !important;
+    border-radius: .1rem !important;
+    background-color: #007bff !important;
 }
 
 .buttons-print {
@@ -447,7 +466,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control::before {
     color: #fff !important;
     border: 0px !important;
     border-radius: .1rem !important;
-    background-color: #007bff !important;
+    background-color: gray !important;
 }
 
 .btn-primary, .btn-secondary, .btn-success, .btn-danger, .btn-info {

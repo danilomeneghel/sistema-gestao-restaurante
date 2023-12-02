@@ -3,17 +3,9 @@ $(document).ready(function () {
         responsive: true,
         ordering: false,
         dom: 'Blfrtip',
-        buttons:[
+        buttons: [
             {
-                text:      '<i class="fas fa-plus"></i> Adicionar',
-                titleAttr: 'Adicionar',
-                className: 'btn btn-success buttons-add',
-                action: function (e, dt, node, config) {
-                    window.location.href = '/pedido/cadastro';
-                }
-            },
-            {
-                extend:    'pdfHtml5',
+                extend:    'pdf',
                 text:      '<i class="fas fa-file-pdf"></i> ',
                 titleAttr: 'Exportar para PDF',
                 className: 'btn btn-danger',
@@ -32,7 +24,7 @@ $(document).ready(function () {
                 }
             },
             {
-                extend:    'excelHtml5',
+                extend:    'excel',
                 text:      '<i class="fas fa-file-excel"></i> ',
                 titleAttr: 'Exportar para Excel',
                 className: 'btn btn-success',
@@ -46,6 +38,20 @@ $(document).ready(function () {
                         }
                     }
                 }
+            },
+            {
+                extend:    'csv',
+                text:      '<i class="fas fa-file-csv"></i> ',
+                titleAttr: 'Exportar para CSV',
+                className: 'btn btn-info',
+                exportOptions: {
+                    columns: ':visible :not(:last-child)',
+                    format: {
+                        header: function ( data, columnIdx ) {
+                            return $(data).attr('id');
+                        }
+                    }
+               }
             },
             {
                 extend:    'print',
@@ -73,6 +79,10 @@ $(document).ready(function () {
         deferRender: true,
         initComplete: function() {
             var api = this.api();
+            $('#data-table_length').each(function () {
+                $(this).append('<a class="btn btn-success btn-add" href="/pedido/cadastro">' +
+                '<i class="fas fa-plus"></i> Adicionar</a>');
+            });
             $("#data-table thead .filters .filter").each( function ( colIdx ) {
                 var cell = $('.filters .filter').eq($(api.column(colIdx).header()).index());
                 var title = $(cell).text();
@@ -145,7 +155,8 @@ $(document).ready(function () {
             }
         ],
         language: {
-            "url": "../json/Portuguese.json"
+            "url": "../json/Portuguese.json",
+            "searchPlaceholder": "Pesquisar"
         }
     });
 });

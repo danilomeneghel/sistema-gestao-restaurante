@@ -1,6 +1,6 @@
-.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0;width:400px !important;}
+.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0;width:100% !important;height:347px !important;overflow-y:auto;overflow-x:hidden;}
 .multiselect-container .input-group{margin:5px}
-.multiselect-container .input-group .fa-search{position: absolute;margin-left: 350px;margin-top: 16px;color: #888 !important;z-index: 100}
+.multiselect-container .input-group .fa-search{position: absolute; right: 25px;margin-top: 16px;color: #888 !important;z-index: 100}
 .multiselect-container>li{padding:0}
 .multiselect-container>li>a.multiselect-all label{font-weight:700}
 .multiselect-container>li.multiselect-group label{margin:0;padding:3px 20px 3px 20px;height:100%;font-weight:700}
@@ -12,5 +12,6 @@
 .multiselect-container label.checkbox,.form-inline .multiselect-container label.radio{padding:3px 32px 3px 32px}
 .multiselect-container li a label.checkbox input[type=checkbox],.form-inline .multiselect-container li a label.radio input[type=radio]{margin-left:-20px;margin-right:0}
 .multiselect-container .multiselect-search{width:93% !important;margin-left:6px !important;margin-top:6px !important;}
+.multiselect-container .filter{height:50px}
 .btn-group>.btn-group:nth-child(2)>.multiselect.btn{border-top-left-radius:4px;border-bottom-left-radius:4px}
 .btn-group {border: 1px solid #d3e0e9; width: 98% !important}
