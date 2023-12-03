@@ -286,7 +286,7 @@ form {
 }
 
 .navbar div:first-child {
-    width: 60% !important;
+    width: 65% !important;
     float: left !important;
 }
 
@@ -297,7 +297,7 @@ form {
 }
 
 .navbar div:last-child {
-    width: 40%;
+    width: 35%;
     text-align: right;
 }
 
