@@ -5,7 +5,7 @@ $(document).ready(function() {
             url: '/pedido/pedidos-disponiveis/' + value,
             type: 'GET',
             success: function(result) {
-                $("#imoveis").html(result);
+                $("#pedidos").html(result);
             }
         });
     });

@@ -58,13 +58,17 @@ public class EstabelecimentoController {
         ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoCadastro");
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
+        List<Bairro> bairros = localidadeService.findAllBairros();
+        List<Municipio> municipios = localidadeService.findAllMunicipios();
         List<Estado> estados = localidadeService.findAllEstados();
-        Bairro bairro = null;
+
+        mv.addObject("bairros", bairros);
+        mv.addObject("municipios", municipios);
+        mv.addObject("estados", estados);
 
         if (idEstado == null) {
             customMessage.add("O Estado selecionado deve ser válido.");
             mv.addObject("erroEstado", true);
-            mv.addObject("estados", estados);
             erro = true;
         }
 
@@ -77,14 +81,11 @@ public class EstabelecimentoController {
         if (estabelecimento.getBairro().getId() == null) {
             customMessage.add("O Bairro selecionado deve ser válido.");
             mv.addObject("erroBairro", true);
-            List<Bairro> bairros = localidadeService.findAllBairros();
-            mv.addObject("bairros", bairros);
-            if (bairros == null) {
-                mv.addObject("semBairros", true);
-            }
             erro = true;
         } else {
-            bairro = localidadeService.findBairroById(estabelecimento.getBairro().getId());
+            Bairro bairro = localidadeService.findBairroById(estabelecimento.getBairro().getId());
+            estabelecimento.setMunicipio(bairro.getMunicipio());
+            estabelecimento.setEstado(bairro.getMunicipio().getEstado());
         }
 
         if (errors.hasErrors() || erro) {
@@ -92,8 +93,6 @@ public class EstabelecimentoController {
             return mv;
         }
 
-        estabelecimento.setMunicipio(bairro.getMunicipio());
-        estabelecimento.setEstado(bairro.getMunicipio().getEstado());
         estabelecimentoService.salvarEstabelecimento(estabelecimento);
 
         mv.addObject("sucesso", "O Estabelecimento foi cadastrado com sucesso!");
@@ -125,13 +124,20 @@ public class EstabelecimentoController {
         ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoEditar");
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
+        List<Bairro> bairros = localidadeService.findAllBairros();
+        List<Municipio> municipios = localidadeService.findAllMunicipios();
         List<Estado> estados = localidadeService.findAllEstados();
-        Bairro bairro = null;
+
+        mv.addObject("bairros", bairros);
+        mv.addObject("municipios", municipios);
+        mv.addObject("estados", estados);
+        mv.addObject("idBairro", estabelecimento.getBairro().getId());
+        mv.addObject("idMunicipio", estabelecimento.getBairro().getMunicipio().getId());
+        mv.addObject("idEstado", estabelecimento.getBairro().getMunicipio().getEstado().getId());
 
         if (idEstado == null) {
             customMessage.add("O Estado selecionado deve ser válido.");
             mv.addObject("erroEstado", true);
-            mv.addObject("estados", estados);
             erro = true;
         }
 
@@ -144,14 +150,11 @@ public class EstabelecimentoController {
         if (estabelecimento.getBairro().getId() == null) {
             customMessage.add("O Bairro selecionado deve ser válido.");
             mv.addObject("erroBairro", true);
-            List<Bairro> bairros = localidadeService.findAllBairros();
-            mv.addObject("bairros", bairros);
-            if (bairros == null) {
-                mv.addObject("semBairros", true);
-            }
             erro = true;
         } else {
-            bairro = localidadeService.findBairroById(estabelecimento.getBairro().getId());
+            Bairro bairro = localidadeService.findBairroById(estabelecimento.getBairro().getId());
+            estabelecimento.setMunicipio(bairro.getMunicipio());
+            estabelecimento.setEstado(bairro.getMunicipio().getEstado());
         }
 
         if (errors.hasErrors() || erro) {
@@ -159,8 +162,6 @@ public class EstabelecimentoController {
             return mv;
         }
 
-        estabelecimento.setMunicipio(bairro.getMunicipio());
-        estabelecimento.setEstado(bairro.getMunicipio().getEstado());
         estabelecimentoService.salvarEstabelecimento(estabelecimento);
 
         mv.addObject("sucesso", "O Estabelecimento foi atualizado com sucesso!");

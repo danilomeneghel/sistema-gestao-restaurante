@@ -1,32 +1,31 @@
 version: '3.3'
 
 services:
-  imoveis-db:
+  restaurante-db:
     image: 'mysql:8.0.30'
-    container_name: imoveis-db
+    container_name: restaurante-db
     restart: always
     networks:
-      - imoveis-network
+      - restaurante-network
     environment:
-      MYSQL_DATABASE: 'imoveis'
-      MYSQL_USER: 'imoveis'
+      MYSQL_DATABASE: 'restaurante'
+      MYSQL_USER: 'restaurante'
       MYSQL_PASSWORD: 'secret'
       MYSQL_ROOT_PASSWORD: 'secretroot'
     volumes:
         - ./:/mysql
     ports:
         - "3306:3306"
-  imoveis-app:
+  restaurante-app:
     build: .
-    container_name: imoveis-app
+    container_name: restaurante-app
     command: mvn clean spring-boot:run -DskipTests -Dspring-boot.run.profiles=docker
     networks:
-      - imoveis-network
+      - restaurante-network
     ports:
       - "8080:8080"
     depends_on:
-      - imoveis-db
+      - restaurante-db
 networks:
-  imoveis-network:
+  restaurante-network:
     driver: "bridge"
-

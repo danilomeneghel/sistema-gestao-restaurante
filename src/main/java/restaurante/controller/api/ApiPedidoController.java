@@ -21,7 +21,7 @@ public class ApiPedidoController {
     private PedidoService pedidoService;
 
     @GetMapping("/pedidos")
-    public ResponseEntity<List<Pedido>> mostrarImoveis() {
+    public ResponseEntity<List<Pedido>> mostrarPedidos() {
         return new ResponseEntity<>(pedidoService.findAllPedidos(), HttpStatus.OK);
     }
 
