@@ -1,8 +1,8 @@
 package restaurante.service;
 
-import loja.entity.UsuarioEntity;
-import loja.model.Usuario;
-import loja.repository.UsuarioRepository;
+import restaurante.entity.UsuarioEntity;
+import restaurante.model.Usuario;
+import restaurante.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,6 +40,15 @@ public class UsuarioService {
 
     public Usuario findUsuarioByUsername(String username) {
         Optional<UsuarioEntity> usuario = rep.findByUsername(username);
+        if(!usuario.isEmpty()) {
+            usuario.get().setPassword(null);
+            return modelMapper.map(usuario.get(), Usuario.class);
+        }
+        return null;
+    }
+
+    public Usuario findUsuarioByUsernameIdNot(String username, Long id) {
+        Optional<UsuarioEntity> usuario = rep.findByUsernameAndIdNot(username, id);
         if(!usuario.isEmpty()) {
             usuario.get().setPassword(null);
             return modelMapper.map(usuario.get(), Usuario.class);

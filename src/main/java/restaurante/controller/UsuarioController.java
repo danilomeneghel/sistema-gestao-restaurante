@@ -1,5 +1,9 @@
 package restaurante.controller;
 
+import restaurante.enums.Ativo;
+import restaurante.enums.Role;
+import restaurante.model.Usuario;
+import restaurante.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -10,10 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import restaurante.enums.Ativo;
-import restaurante.enums.Role;
-import restaurante.model.Usuario;
-import restaurante.service.UsuarioService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/usuario")
@@ -41,9 +44,22 @@ public class UsuarioController {
     @PostMapping("/cadastrar")
     public ModelAndView cadastrarUsuario(@Validated Usuario usuario, Errors errors) {
         ModelAndView mv = new ModelAndView("usuario/usuarioCadastro");
-        if (errors.hasErrors()) {
+        boolean erro = false;
+        List<String> customMessage = new ArrayList<String>();
+
+        Usuario usu = usuarioService.findUsuarioByUsername(usuario.getUsername());
+
+        if (usu != null) {
+            customMessage.add("Usuário já cadastrado.");
+            mv.addObject("erroUsuario", true);
+            erro = true;
+        }
+
+        if (errors.hasErrors() || erro) {
+            mv.addObject("customMessage", customMessage);
             return mv;
         }
+
         mv.addObject("sucesso", "O Usuário foi cadastrado com sucesso!");
         usuarioService.salvarUsuario(usuario);
         mv.addObject("usuario", new Usuario());
@@ -65,9 +81,22 @@ public class UsuarioController {
     @PostMapping("/editar")
     public ModelAndView editarUsuario(@Validated Usuario usuario, Errors errors) {
         ModelAndView mv = new ModelAndView("usuario/usuarioEditar");
-        if (errors.hasErrors()) {
+        boolean erro = false;
+        List<String> customMessage = new ArrayList<String>();
+
+        Usuario usu = usuarioService.findUsuarioByUsernameIdNot(usuario.getUsername(), usuario.getId());
+
+        if (usu != null) {
+            customMessage.add("Usuário já cadastrado.");
+            mv.addObject("erroUsuario", true);
+            erro = true;
+        }
+
+        if (errors.hasErrors() || erro) {
+            mv.addObject("customMessage", customMessage);
             return mv;
         }
+
         mv.addObject("sucesso", "O Usuário foi atualizado com sucesso!");
         usuarioService.salvarUsuario(usuario);
         return mv;

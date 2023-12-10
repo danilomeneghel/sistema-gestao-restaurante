@@ -1,9 +1,12 @@
 package restaurante.controller;
 
-import loja.enums.Ativo;
-import loja.model.*;
-import loja.service.FornecedorService;
-import loja.service.LocalidadeService;
+import restaurante.enums.Ativo;
+import restaurante.model.Bairro;
+import restaurante.model.Estado;
+import restaurante.model.Fornecedor;
+import restaurante.model.Municipio;
+import restaurante.service.FornecedorService;
+import restaurante.service.LocalidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -64,7 +67,7 @@ public class FornecedorController {
         Fornecedor fornec = fornecedorService.findFornecedorByNome(fornecedor.getNome());
 
         if (fornec != null) {
-            customMessage.add("Nome de Fornecedor já cadastrado.");
+            customMessage.add("Nome do Fornecedor já cadastrado.");
             mv.addObject("erroFornecedor", true);
             erro = true;
         }
@@ -143,10 +146,10 @@ public class FornecedorController {
 
         mv.addObject("estados", estados);
 
-        Fornecedor fornec = fornecedorService.findFornecedorByNome(fornecedor.getNome());
+        Fornecedor fornec = fornecedorService.findFornecedorByNomeIdNot(fornecedor.getNome(), fornecedor.getId());
 
         if (fornec != null) {
-            customMessage.add("Nome de Fornecedor já cadastrado.");
+            customMessage.add("Nome do Fornecedor já cadastrado.");
             mv.addObject("erroFornecedor", true);
             erro = true;
         }

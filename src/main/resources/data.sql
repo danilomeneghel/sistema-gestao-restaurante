@@ -4,9 +4,11 @@ INSERT INTO `municipio` VALUES (1,'Sorocaba',1),(2,'Campinas',1),(3,'São Paulo'
 
 INSERT INTO `bairro` VALUES (1,'Campolim',1),(2,'Mangal',1),(3,'Além-Ponte',1),(4,'Botafogo',2),(5,'Cambuí',2),(6,'Guanabara',2),(7,'Sumaré',3),(8,'Lapa',3),(9,'Bela Vista',3),(10,'Cachambi',4),(11,'Méier',4),(12,'Jacarepaguá',4),(13,'Galo Branco',5),(14,'Estrela do Norte',5),(15,'Lindo Parque',5),(16,'Figueira',6),(17,'Pantanal',6),(18,'Campos Elísios',6),(19,'Guarapes',7),(20,'Igapó',7),(21,'Lagoa Azul',7),(22,'Cascalho',8),(23,'Conjunto da Ponte',8),(24,'Santo Antônio',8),(25,'Fernando Pedrosa',9),(26,'Alto da Alegria',9),(27,'Prefeito Jaime Batista',9),(28,'Savassi',10),(29,'Lourdes',10),(30,'Pampulha',10),(31,'Catete',11),(32,'Barro Preto',11),(33,'Galego',11),(34,'Alterosas',12),(35,'Imbiruçu',12),(36,'Petrovale',12);
 
-INSERT INTO `estabelecimento` VALUES (1,1,'email@teste.com','Restaurante Coma Bem','Rua Teste, 01','(11)99999-9999',1,1,1);
+INSERT INTO `estabelecimento` VALUES (1,1,'email1@teste.com','Restaurante Coma Bem','Rua Teste, 01','(11)99999-9999',1,1,1);
 
-INSERT INTO `fornecedor` VALUES (1,1,'email@teste.com','Fornecedor Teste','Rua Teste, 02','(21)99999-9999',1,1,1);
+INSERT INTO `fornecedor` VALUES (1,1,'email2@teste.com','Fornecedor Teste','Rua Teste, 02','(21)99999-9999',1,1,1);
+
+INSERT INTO `cliente` VALUES (1,1,'email3@teste.com','Cliente Teste','Rua Teste, 03','(31)99999-9999',1,1,1);
 
 INSERT INTO `categoria` VALUES (1,'Comida'),(2,'Salgado'),(3,'Bebida'),(4,'Bebida Alcoólica'),(5,'Sobremesa');
 

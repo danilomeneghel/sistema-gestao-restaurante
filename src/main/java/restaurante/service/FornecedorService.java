@@ -1,8 +1,8 @@
 package restaurante.service;
 
-import loja.entity.FornecedorEntity;
-import loja.model.Fornecedor;
-import loja.repository.FornecedorRepository;
+import restaurante.entity.FornecedorEntity;
+import restaurante.model.Fornecedor;
+import restaurante.repository.FornecedorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,14 @@ public class FornecedorService {
 
     public Fornecedor findFornecedorByNome(String nome) {
         Optional<FornecedorEntity> fornecedor = rep.findByNome(nome);
+        if (!fornecedor.isEmpty()) {
+            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        }
+        return null;
+    }
+
+    public Fornecedor findFornecedorByNomeIdNot(String nome, Long id) {
+        Optional<FornecedorEntity> fornecedor = rep.findByNomeAndIdNot(nome, id);
         if (!fornecedor.isEmpty()) {
             return modelMapper.map(fornecedor.get(), Fornecedor.class);
         }

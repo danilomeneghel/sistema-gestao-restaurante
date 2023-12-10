@@ -2,10 +2,10 @@ package restaurante.controller;
 
 import restaurante.enums.Ativo;
 import restaurante.model.Bairro;
-import restaurante.model.Estabelecimento;
+import restaurante.model.Cliente;
 import restaurante.model.Estado;
 import restaurante.model.Municipio;
-import restaurante.service.EstabelecimentoService;
+import restaurante.service.ClienteService;
 import restaurante.service.LocalidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,30 +22,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/estabelecimento")
-public class EstabelecimentoController {
+@RequestMapping("/cliente")
+public class ClienteController {
 
     @Autowired
-    private EstabelecimentoService estabelecimentoService;
+    private ClienteService clienteService;
 
     @Autowired
     private LocalidadeService localidadeService;
 
-    @GetMapping("/estabelecimentos")
-    public ModelAndView mostrarEstabelecimentos() {
-        ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentos");
-        mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
+    @GetMapping("/clientes")
+    public ModelAndView mostrarClientes() {
+        ModelAndView mv = new ModelAndView("cliente/clientes");
+        mv.addObject("clientes", clienteService.findAllClientes());
         return mv;
     }
 
     @GetMapping("/cadastro")
-    public ModelAndView cadastroEstabelecimento() {
-        ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoCadastro");
+    public ModelAndView cadastroCliente() {
+        ModelAndView mv = new ModelAndView("cliente/clienteCadastro");
         List<Bairro> bairros = localidadeService.findAllBairros();
         List<Municipio> municipios = localidadeService.findAllMunicipios();
         List<Estado> estados = localidadeService.findAllEstados();
 
-        mv.addObject("estabelecimento", new Estabelecimento());
+        mv.addObject("cliente", new Cliente());
         mv.addObject("bairros", bairros);
         mv.addObject("municipios", municipios);
         mv.addObject("estados", estados);
@@ -54,8 +54,8 @@ public class EstabelecimentoController {
     }
 
     @PostMapping("/cadastrar")
-    public ModelAndView cadastrarEstabelecimento(@Validated Estabelecimento estabelecimento, Errors errors, Long idEstado, Long idMunicipio) {
-        ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoCadastro");
+    public ModelAndView cadastrarCliente(@Validated Cliente cliente, Errors errors, Long idEstado, Long idMunicipio) {
+        ModelAndView mv = new ModelAndView("cliente/clienteCadastro");
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
         List<Estado> estados = localidadeService.findAllEstados();
@@ -64,11 +64,11 @@ public class EstabelecimentoController {
 
         mv.addObject("estados", estados);
 
-        Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNome(estabelecimento.getNome());
+        Cliente estab = clienteService.findClienteByNome(cliente.getNome());
 
         if (estab != null) {
-            customMessage.add("Nome do Estabelecimento já cadastrado.");
-            mv.addObject("erroEstabelecimento", true);
+            customMessage.add("Nome do Cliente já cadastrado.");
+            mv.addObject("erroCliente", true);
             erro = true;
         }
 
@@ -87,16 +87,16 @@ public class EstabelecimentoController {
             municipios = localidadeService.findMunicipioPerEstado(idEstado);
         }
 
-        if (estabelecimento.getBairro().getId() == null) {
+        if (cliente.getBairro().getId() == null) {
             customMessage.add("O Bairro selecionado deve ser válido.");
             mv.addObject("erroBairro", true);
             bairros = localidadeService.findAllBairros();
             erro = true;
         } else {
             bairros = localidadeService.findBairroPerMunicipio(idMunicipio);
-            Bairro bairro = localidadeService.findBairroById(estabelecimento.getBairro().getId());
-            estabelecimento.setMunicipio(bairro.getMunicipio());
-            estabelecimento.setEstado(bairro.getMunicipio().getEstado());
+            Bairro bairro = localidadeService.findBairroById(cliente.getBairro().getId());
+            cliente.setMunicipio(bairro.getMunicipio());
+            cliente.setEstado(bairro.getMunicipio().getEstado());
         }
 
         if (errors.hasErrors() || erro) {
@@ -104,40 +104,40 @@ public class EstabelecimentoController {
             return mv;
         }
 
-        estabelecimentoService.salvarEstabelecimento(estabelecimento);
+        clienteService.salvarCliente(cliente);
 
-        mv.addObject("estabelecimento", new Estabelecimento());
+        mv.addObject("cliente", new Cliente());
         mv.addObject("bairros", bairros);
         mv.addObject("municipios", municipios);
         mv.addObject("idEstado", idEstado);
         mv.addObject("idMunicipio", idMunicipio);
-        mv.addObject("idBairro", estabelecimento.getBairro().getId());
-        mv.addObject("sucesso", "O Estabelecimento foi cadastrado com sucesso!");
+        mv.addObject("idBairro", cliente.getBairro().getId());
+        mv.addObject("sucesso", "O Cliente foi cadastrado com sucesso!");
         return mv;
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editaEstabelecimento(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoEditar");
-        Estabelecimento estabelecimento = estabelecimentoService.findEstabelecimentoById(id);
-        List<Bairro> bairros = localidadeService.findBairroPerMunicipio(estabelecimento.getBairro().getMunicipio().getId());
-        List<Municipio> municipios = localidadeService.findMunicipioPerEstado(estabelecimento.getBairro().getMunicipio().getEstado().getId());
+    public ModelAndView editaCliente(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("cliente/clienteEditar");
+        Cliente cliente = clienteService.findClienteById(id);
+        List<Bairro> bairros = localidadeService.findBairroPerMunicipio(cliente.getBairro().getMunicipio().getId());
+        List<Municipio> municipios = localidadeService.findMunicipioPerEstado(cliente.getBairro().getMunicipio().getEstado().getId());
         List<Estado> estados = localidadeService.findAllEstados();
 
-        mv.addObject("estabelecimento", estabelecimento);
+        mv.addObject("cliente", cliente);
         mv.addObject("bairros", bairros);
-        mv.addObject("idBairro", estabelecimento.getBairro().getId());
+        mv.addObject("idBairro", cliente.getBairro().getId());
         mv.addObject("municipios", municipios);
-        mv.addObject("idMunicipio", estabelecimento.getBairro().getMunicipio().getId());
+        mv.addObject("idMunicipio", cliente.getBairro().getMunicipio().getId());
         mv.addObject("estados", estados);
-        mv.addObject("idEstado", estabelecimento.getBairro().getMunicipio().getEstado().getId());
+        mv.addObject("idEstado", cliente.getBairro().getMunicipio().getEstado().getId());
         mv.addObject("ativo", Ativo.values());
         return mv;
     }
 
     @PostMapping("/editar")
-    public ModelAndView editarEstabelecimento(@Validated Estabelecimento estabelecimento, Errors errors, Long idEstado, Long idMunicipio) {
-        ModelAndView mv = new ModelAndView("estabelecimento/estabelecimentoEditar");
+    public ModelAndView editarCliente(@Validated Cliente cliente, Errors errors, Long idEstado, Long idMunicipio) {
+        ModelAndView mv = new ModelAndView("cliente/clienteEditar");
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
         List<Estado> estados = localidadeService.findAllEstados();
@@ -146,11 +146,11 @@ public class EstabelecimentoController {
 
         mv.addObject("estados", estados);
 
-        Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNomeIdNot(estabelecimento.getNome(), estabelecimento.getId());
+        Cliente estab = clienteService.findClienteByNomeIdNot(cliente.getNome(), cliente.getId());
 
         if (estab != null) {
-            customMessage.add("Nome do Estabelecimento já cadastrado.");
-            mv.addObject("erroEstabelecimento", true);
+            customMessage.add("Nome do Cliente já cadastrado.");
+            mv.addObject("erroCliente", true);
             erro = true;
         }
 
@@ -169,16 +169,16 @@ public class EstabelecimentoController {
             municipios = localidadeService.findMunicipioPerEstado(idEstado);
         }
 
-        if (estabelecimento.getBairro().getId() == null) {
+        if (cliente.getBairro().getId() == null) {
             customMessage.add("O Bairro selecionado deve ser válido.");
             mv.addObject("erroBairro", true);
             bairros = localidadeService.findAllBairros();
             erro = true;
         } else {
             bairros = localidadeService.findBairroPerMunicipio(idMunicipio);
-            Bairro bairro = localidadeService.findBairroById(estabelecimento.getBairro().getId());
-            estabelecimento.setMunicipio(bairro.getMunicipio());
-            estabelecimento.setEstado(bairro.getMunicipio().getEstado());
+            Bairro bairro = localidadeService.findBairroById(cliente.getBairro().getId());
+            cliente.setMunicipio(bairro.getMunicipio());
+            cliente.setEstado(bairro.getMunicipio().getEstado());
         }
 
         if (errors.hasErrors() || erro) {
@@ -186,28 +186,28 @@ public class EstabelecimentoController {
             return mv;
         }
 
-        estabelecimentoService.salvarEstabelecimento(estabelecimento);
+        clienteService.salvarCliente(cliente);
 
-        mv.addObject("estabelecimento", estabelecimento);
+        mv.addObject("cliente", cliente);
         mv.addObject("bairros", bairros);
         mv.addObject("municipios", municipios);
         mv.addObject("idEstado", idEstado);
         mv.addObject("idMunicipio", idMunicipio);
-        mv.addObject("idBairro", estabelecimento.getBairro().getId());
-        mv.addObject("sucesso", "O Estabelecimento foi atualizado com sucesso!");
+        mv.addObject("idBairro", cliente.getBairro().getId());
+        mv.addObject("sucesso", "O Cliente foi atualizado com sucesso!");
         return mv;
     }
 
     @GetMapping("/excluir/{id}")
-    public ModelAndView excluirEstabelecimento(@PathVariable Long id, RedirectAttributes ra) {
-        Estabelecimento estabelecimento = estabelecimentoService.findEstabelecimentoById(id);
-        if (estabelecimento != null) {
-            estabelecimentoService.excluirEstabelecimentoById(id);
-            ra.addFlashAttribute("sucesso", "O Estabelecimento foi excluído com sucesso.");
+    public ModelAndView excluirCliente(@PathVariable Long id, RedirectAttributes ra) {
+        Cliente cliente = clienteService.findClienteById(id);
+        if (cliente != null) {
+            clienteService.excluirClienteById(id);
+            ra.addFlashAttribute("sucesso", "O Cliente foi excluído com sucesso.");
         } else {
-            ra.addFlashAttribute("erro", "O Estabelecimento não foi encontrado.");
+            ra.addFlashAttribute("erro", "O Cliente não foi encontrado.");
         }
-        return new ModelAndView("redirect:/estabelecimento/estabelecimentos");
+        return new ModelAndView("redirect:/cliente/clientes");
     }
 
 }
