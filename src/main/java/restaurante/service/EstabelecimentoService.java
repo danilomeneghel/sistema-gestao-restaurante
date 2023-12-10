@@ -1,11 +1,11 @@
 package restaurante.service;
 
+import loja.entity.EstabelecimentoEntity;
+import loja.model.Estabelecimento;
+import loja.repository.EstabelecimentoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import restaurante.entity.EstabelecimentoEntity;
-import restaurante.model.Estabelecimento;
-import restaurante.repository.EstabelecimentoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +26,18 @@ public class EstabelecimentoService {
 
     public Estabelecimento findEstabelecimentoById(Long id) {
         Optional<EstabelecimentoEntity> estabelecimento = rep.findById(id);
-        return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        if (!estabelecimento.isEmpty()) {
+            return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        }
+        return null;
     }
 
     public Estabelecimento findEstabelecimentoByNome(String nome) {
         Optional<EstabelecimentoEntity> estabelecimento = rep.findByNome(nome);
-        return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        if (!estabelecimento.isEmpty()) {
+            return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        }
+        return null;
     }
 
     public Estabelecimento salvarEstabelecimento(Estabelecimento estabelecimento) {

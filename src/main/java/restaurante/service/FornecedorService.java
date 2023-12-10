@@ -1,11 +1,11 @@
 package restaurante.service;
 
+import loja.entity.FornecedorEntity;
+import loja.model.Fornecedor;
+import loja.repository.FornecedorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import restaurante.entity.FornecedorEntity;
-import restaurante.model.Fornecedor;
-import restaurante.repository.FornecedorRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +26,18 @@ public class FornecedorService {
 
     public Fornecedor findFornecedorById(Long id) {
         Optional<FornecedorEntity> fornecedor = rep.findById(id);
-        return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (!fornecedor.isEmpty()) {
+            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        }
+        return null;
     }
 
     public Fornecedor findFornecedorByNome(String nome) {
         Optional<FornecedorEntity> fornecedor = rep.findByNome(nome);
-        return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (!fornecedor.isEmpty()) {
+            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        }
+        return null;
     }
 
     public Fornecedor salvarFornecedor(Fornecedor fornecedor) {
