@@ -48,6 +48,11 @@ public class ClienteService {
         return null;
     }
 
+    public List<Cliente> findClienteByNomeIgnoreCase(String nome) {
+        List<ClienteEntity> clientes = rep.findByNomeContainingIgnoreCase(nome);
+        return clientes.stream().map(entity -> modelMapper.map(entity, Cliente.class)).collect(Collectors.toList());
+    }
+
     public Cliente salvarCliente(Cliente cliente) {
         ClienteEntity clienteEntity = modelMapper.map(cliente, ClienteEntity.class);
         ClienteEntity salvarCliente = rep.save(clienteEntity);

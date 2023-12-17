@@ -30,12 +30,12 @@ public class ApiPedidoController {
         return new ResponseEntity<>(pedidoService.findPedidoById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/pedido/cadastro")
+    @PostMapping("/cadastro")
     public ResponseEntity<Pedido> cadastrarPedido(@RequestBody Pedido pedido) {
         return new ResponseEntity<>(pedidoService.salvarPedido(pedido), HttpStatus.CREATED);
     }
 
-    @PutMapping("/pedido/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Pedido> editarPedido(@PathVariable Long id, @RequestBody Pedido pedido) {
         Pedido imo = pedidoService.findPedidoById(id);
         if (imo == null) {
@@ -45,7 +45,7 @@ public class ApiPedidoController {
         return new ResponseEntity<>(pedidoService.salvarPedido(pedido), HttpStatus.OK);
     }
 
-    @DeleteMapping("/pedido/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirPedido(@PathVariable Long id) {
         pedidoService.excluirPedidoById(id);
     }

@@ -40,7 +40,7 @@ public class ApiFornecedorController {
         return new ResponseEntity<>(fornecedorService.salvarFornecedor(fornecedor), HttpStatus.CREATED);
     }
 
-    @PutMapping("/fornecedor/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Fornecedor> editarFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedor) {
         Fornecedor usu = fornecedorService.findFornecedorById(id);
         if (usu == null) {
@@ -50,7 +50,7 @@ public class ApiFornecedorController {
         return new ResponseEntity<>(fornecedorService.salvarFornecedor(fornecedor), HttpStatus.OK);
     }
 
-    @DeleteMapping("/fornecedor/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirFornecedor(@PathVariable Long id) {
         fornecedorService.excluirFornecedorById(id);
     }

@@ -40,7 +40,7 @@ public class ApiClienteController {
         return new ResponseEntity<>(clienteService.salvarCliente(cliente), HttpStatus.CREATED);
     }
 
-    @PutMapping("/cliente/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Cliente> editarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         Cliente usu = clienteService.findClienteById(id);
         if (usu == null) {
@@ -50,9 +50,14 @@ public class ApiClienteController {
         return new ResponseEntity<>(clienteService.salvarCliente(cliente), HttpStatus.OK);
     }
 
-    @DeleteMapping("/cliente/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirCliente(@PathVariable Long id) {
         clienteService.excluirClienteById(id);
+    }
+
+    @GetMapping("/pesquisa")
+    public ResponseEntity<List<Cliente>> pesquisarCliente(String pesquisa) {
+        return new ResponseEntity<>(clienteService.findClienteByNomeIgnoreCase(pesquisa), HttpStatus.OK);
     }
 
 }

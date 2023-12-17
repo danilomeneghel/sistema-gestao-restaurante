@@ -30,12 +30,12 @@ public class ApiCardapioController {
         return new ResponseEntity<>(cardapioService.findAllCardapios(), HttpStatus.OK);
     }
 
-    @PostMapping("/cardapio/cadastro")
+    @PostMapping("/cadastro")
     public ResponseEntity<Cardapio> cadastroCardapio(@RequestBody Cardapio cardapio) {
         return new ResponseEntity<>(cardapioService.salvarCardapio(cardapio), HttpStatus.CREATED);
     }
 
-    @PutMapping("/cardapio/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Cardapio> editarCardapio(@PathVariable Long id, @RequestBody Cardapio cardapio) {
         Cardapio cat = cardapioService.findCardapioById(id);
         if (cat == null) {
@@ -45,12 +45,12 @@ public class ApiCardapioController {
         return new ResponseEntity<>(cardapioService.salvarCardapio(cardapio), HttpStatus.OK);
     }
 
-    @DeleteMapping("/cardapio/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirCardapio(@PathVariable Long id) {
         cardapioService.excluirCardapio(id);
     }
 
-    @GetMapping("/cardapio/pesquisa")
+    @GetMapping("/pesquisa")
     public ResponseEntity<List<Cardapio>> pesquisarCardapio(String pesquisa) {
         return new ResponseEntity<>(cardapioService.findCardapioByNome(pesquisa), HttpStatus.OK);
     }

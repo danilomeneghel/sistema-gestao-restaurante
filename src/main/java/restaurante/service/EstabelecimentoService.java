@@ -15,17 +15,17 @@ import java.util.stream.Collectors;
 public class EstabelecimentoService {
 
     @Autowired
-    private EstabelecimentoRepository rep;
+    private EstabelecimentoRepository estabelecimentoRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
 
     public List<Estabelecimento> findAllEstabelecimentos() {
-        List<EstabelecimentoEntity> estabelecimentos = rep.findAll();
+        List<EstabelecimentoEntity> estabelecimentos = estabelecimentoRepository.findAll();
         return estabelecimentos.stream().map(entity -> modelMapper.map(entity, Estabelecimento.class)).collect(Collectors.toList());
     }
 
     public Estabelecimento findEstabelecimentoById(Long id) {
-        Optional<EstabelecimentoEntity> estabelecimento = rep.findById(id);
+        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findById(id);
         if (!estabelecimento.isEmpty()) {
             return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
         }
@@ -33,7 +33,7 @@ public class EstabelecimentoService {
     }
 
     public Estabelecimento findEstabelecimentoByNome(String nome) {
-        Optional<EstabelecimentoEntity> estabelecimento = rep.findByNome(nome);
+        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByNome(nome);
         if (!estabelecimento.isEmpty()) {
             return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
         }
@@ -41,25 +41,30 @@ public class EstabelecimentoService {
     }
 
     public Estabelecimento findEstabelecimentoByNomeIdNot(String nome, Long id) {
-        Optional<EstabelecimentoEntity> estabelecimento = rep.findByNomeAndIdNot(nome, id);
+        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByNomeAndIdNot(nome, id);
         if (!estabelecimento.isEmpty()) {
             return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
         }
         return null;
     }
 
+    public List<Estabelecimento> findEstabelecimentoByNomeIgnoreCase(String nome) {
+        List<EstabelecimentoEntity> estabelecimentos = estabelecimentoRepository.findByNomeContainingIgnoreCase(nome);
+        return estabelecimentos.stream().map(entity -> modelMapper.map(entity, Estabelecimento.class)).collect(Collectors.toList());
+    }
+
     public Estabelecimento salvarEstabelecimento(Estabelecimento estabelecimento) {
         EstabelecimentoEntity estabelecimentoEntity = modelMapper.map(estabelecimento, EstabelecimentoEntity.class);
-        EstabelecimentoEntity salvarEstabelecimento = rep.save(estabelecimentoEntity);
+        EstabelecimentoEntity salvarEstabelecimento = estabelecimentoRepository.save(estabelecimentoEntity);
         return modelMapper.map(salvarEstabelecimento, Estabelecimento.class);
     }
 
     public void excluirEstabelecimentoById(Long id) {
-        rep.deleteById(id);
+        estabelecimentoRepository.deleteById(id);
     }
 
     public boolean emailExistente(String email) {
-        Optional<EstabelecimentoEntity> estabelecimento = rep.findByEmail(email);
+        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByEmail(email);
         return !estabelecimento.isEmpty();
     }
 

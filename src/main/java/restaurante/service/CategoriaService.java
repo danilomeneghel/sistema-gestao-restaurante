@@ -1,11 +1,11 @@
 package restaurante.service;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import restaurante.entity.CategoriaEntity;
 import restaurante.model.Categoria;
 import restaurante.repository.CategoriaRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +32,19 @@ public class CategoriaService {
         return null;
     }
 
+    public Categoria findCategoriaByNome(String nome) {
+        Optional<CategoriaEntity> categoriaEntity = categoriaRepository.findByNome(nome);
+        if(!categoriaEntity.isEmpty()) {
+            return modelMapper.map(categoriaEntity, Categoria.class);
+        }
+        return null;
+    }
+
+    public List<Categoria> findCategoriaByNomeIgnoreCase(String nome) {
+        List<CategoriaEntity> categorias = categoriaRepository.findByNomeContainingIgnoreCase(nome);
+        return categorias.stream().map(entity -> modelMapper.map(entity, Categoria.class)).collect(Collectors.toList());
+    }
+
     public Categoria salvarCategoria(Categoria categoria) {
         CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
         CategoriaEntity salvarCategoria = categoriaRepository.save(categoriaEntity);
@@ -40,11 +53,6 @@ public class CategoriaService {
 
     public void excluirCategoria(Long id) {
         categoriaRepository.deleteById(id);
-    }
-
-    public List<Categoria> findCategoriaByNome(String nome) {
-        List<CategoriaEntity> categorias = categoriaRepository.findByNomeContainingIgnoreCase(nome);
-        return categorias.stream().map(entity -> modelMapper.map(entity, Categoria.class)).collect(Collectors.toList());
     }
 
 }

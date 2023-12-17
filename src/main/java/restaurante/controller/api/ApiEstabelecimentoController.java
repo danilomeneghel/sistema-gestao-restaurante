@@ -40,7 +40,7 @@ public class ApiEstabelecimentoController {
         return new ResponseEntity<>(estabelecimentoService.salvarEstabelecimento(estabelecimento), HttpStatus.CREATED);
     }
 
-    @PutMapping("/estabelecimento/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Estabelecimento> editarEstabelecimento(@PathVariable Long id, @RequestBody Estabelecimento estabelecimento) {
         Estabelecimento usu = estabelecimentoService.findEstabelecimentoById(id);
         if (usu == null) {
@@ -50,7 +50,7 @@ public class ApiEstabelecimentoController {
         return new ResponseEntity<>(estabelecimentoService.salvarEstabelecimento(estabelecimento), HttpStatus.OK);
     }
 
-    @DeleteMapping("/estabelecimento/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirEstabelecimento(@PathVariable Long id) {
         estabelecimentoService.excluirEstabelecimentoById(id);
     }

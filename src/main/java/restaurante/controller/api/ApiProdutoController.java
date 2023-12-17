@@ -25,12 +25,12 @@ public class ApiProdutoController {
         return new ResponseEntity<>(classficadorService.findAllProdutos(), HttpStatus.OK);
     }
 
-    @PostMapping("/produto/cadastro")
+    @PostMapping("/cadastro")
     public ResponseEntity<Produto> cadastroProduto(@RequestBody Produto produto) {
         return new ResponseEntity<>(classficadorService.salvarProduto(produto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/produto/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Produto> editarProduto(@PathVariable Long id, @RequestBody Produto produto) {
         Produto cat = classficadorService.findProdutoById(id);
         if (cat == null) {
@@ -40,12 +40,12 @@ public class ApiProdutoController {
         return new ResponseEntity<>(classficadorService.salvarProduto(produto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/produto/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirProduto(@PathVariable Long id) {
         classficadorService.excluirProduto(id);
     }
 
-    @GetMapping("/produto/pesquisa")
+    @GetMapping("/pesquisa")
     public ResponseEntity<List<Produto>> pesquisarProduto(String pesquisa) {
         return new ResponseEntity<>(classficadorService.findProdutoByNome(pesquisa), HttpStatus.OK);
     }
