@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@OpenAPIDefinition(info=@Info(title="API Gestão de Restaurantes", description = "Sistema de Gestão de Restaurante"))
+@OpenAPIDefinition(info=@Info(title="API Gestão de Restaurantes", description = "Sistema de Gestão de Restaurantes"))
 public class ApiController {
 
 }

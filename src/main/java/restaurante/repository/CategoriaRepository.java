@@ -1,7 +1,7 @@
 package restaurante.repository;
 
-import restaurante.entity.CategoriaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import restaurante.entity.CategoriaEntity;
 
 import java.util.List;
 import java.util.Optional;

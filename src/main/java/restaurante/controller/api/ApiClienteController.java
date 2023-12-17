@@ -1,13 +1,13 @@
 package restaurante.controller.api;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import restaurante.model.Cliente;
-import restaurante.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import restaurante.model.Cliente;
+import restaurante.service.ClienteService;
 
 import java.util.List;
 

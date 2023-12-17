@@ -1,8 +1,8 @@
 package restaurante.repository;
 
-import restaurante.entity.EstabelecimentoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import restaurante.entity.EstabelecimentoEntity;
 
 import java.util.List;
 import java.util.Optional;
