@@ -25,25 +25,25 @@ public class EstabelecimentoService {
     }
 
     public Estabelecimento findEstabelecimentoById(Long id) {
-        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findById(id);
-        if (!estabelecimento.isEmpty()) {
-            return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        if (id != null) {
+            EstabelecimentoEntity estabelecimento = estabelecimentoRepository.findById(id).orElse(new EstabelecimentoEntity());
+            return modelMapper.map(estabelecimento, Estabelecimento.class);
         }
         return null;
     }
 
     public Estabelecimento findEstabelecimentoByNome(String nome) {
-        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByNome(nome);
-        if (!estabelecimento.isEmpty()) {
-            return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        if (!nome.isEmpty()) {
+            EstabelecimentoEntity estabelecimento = estabelecimentoRepository.findByNome(nome).orElse(new EstabelecimentoEntity());
+            return modelMapper.map(estabelecimento, Estabelecimento.class);
         }
         return null;
     }
 
     public Estabelecimento findEstabelecimentoByNomeIdNot(String nome, Long id) {
-        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByNomeAndIdNot(nome, id);
-        if (!estabelecimento.isEmpty()) {
-            return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        if (!nome.isEmpty() && id != null) {
+            EstabelecimentoEntity estabelecimento = estabelecimentoRepository.findByNomeAndIdNot(nome, id).orElse(new EstabelecimentoEntity());
+            return modelMapper.map(estabelecimento, Estabelecimento.class);
         }
         return null;
     }
@@ -60,12 +60,17 @@ public class EstabelecimentoService {
     }
 
     public void excluirEstabelecimentoById(Long id) {
-        estabelecimentoRepository.deleteById(id);
+        if (id != null) {
+            estabelecimentoRepository.deleteById(id);
+        }
     }
 
     public boolean emailExistente(String email) {
-        Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByEmail(email);
-        return !estabelecimento.isEmpty();
+        if (!email.isEmpty()) {
+            Optional<EstabelecimentoEntity> estabelecimento = estabelecimentoRepository.findByEmail(email);
+            return !estabelecimento.isEmpty();
+        }
+        return false;
     }
 
 }

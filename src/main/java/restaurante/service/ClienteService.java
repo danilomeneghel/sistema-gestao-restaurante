@@ -25,25 +25,25 @@ public class ClienteService {
     }
 
     public Cliente findClienteById(Long id) {
-        Optional<ClienteEntity> cliente = rep.findById(id);
-        if (!cliente.isEmpty()) {
-            return modelMapper.map(cliente.get(), Cliente.class);
+        if (id != null) {
+            ClienteEntity cliente = rep.findById(id).orElse(new ClienteEntity());
+            return modelMapper.map(cliente, Cliente.class);
         }
         return null;
     }
 
     public Cliente findClienteByNome(String nome) {
-        Optional<ClienteEntity> cliente = rep.findByNome(nome);
-        if (!cliente.isEmpty()) {
-            return modelMapper.map(cliente.get(), Cliente.class);
+        if (!nome.isEmpty()) {
+            ClienteEntity cliente = rep.findByNome(nome).orElse(new ClienteEntity());
+            return modelMapper.map(cliente, Cliente.class);
         }
         return null;
     }
 
     public Cliente findClienteByNomeIdNot(String nome, Long id) {
-        Optional<ClienteEntity> cliente = rep.findByNomeAndIdNot(nome, id);
-        if (!cliente.isEmpty()) {
-            return modelMapper.map(cliente.get(), Cliente.class);
+        if (!nome.isEmpty() && id != null) {
+            ClienteEntity cliente = rep.findByNomeAndIdNot(nome, id).orElse(new ClienteEntity());
+            return modelMapper.map(cliente, Cliente.class);
         }
         return null;
     }
@@ -60,12 +60,17 @@ public class ClienteService {
     }
 
     public void excluirClienteById(Long id) {
-        rep.deleteById(id);
+        if (id != null) {
+            rep.deleteById(id);
+        }
     }
 
     public boolean emailExistente(String email) {
-        Optional<ClienteEntity> cliente = rep.findByEmail(email);
-        return !cliente.isEmpty();
+        if(!email.isEmpty()) {
+            Optional<ClienteEntity> cliente = rep.findByEmail(email);
+            return !cliente.isEmpty();
+        }
+        return false;
     }
 
 }

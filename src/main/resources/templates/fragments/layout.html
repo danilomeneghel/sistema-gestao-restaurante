@@ -92,7 +92,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-logout">
                         <a class="dropdown-item"
-                           th:href="@{'/perfil/usuario/'+${#authentication.getPrincipal().getUsername()}}">Perfil</a>
+                           th:href="@{'/perfil/'+${#authentication.getPrincipal().getUsername()}}">Perfil</a>
                         <a class="dropdown-item" th:href="@{/logout}">Sair</a>
                     </div>
                 </span>

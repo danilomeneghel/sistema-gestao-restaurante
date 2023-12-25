@@ -25,16 +25,16 @@ public class CategoriaService {
     }
 
     public Categoria findCategoriaById(Long id) {
-        Optional<CategoriaEntity> categoriaEntity = categoriaRepository.findById(id);
-        if (!categoriaEntity.isEmpty()) {
+        if (id != null) {
+            Optional<CategoriaEntity> categoriaEntity = categoriaRepository.findById(id);
             return modelMapper.map(categoriaEntity.get(), Categoria.class);
         }
         return null;
     }
 
     public Categoria findCategoriaByNome(String nome) {
-        Optional<CategoriaEntity> categoriaEntity = categoriaRepository.findByNome(nome);
-        if(!categoriaEntity.isEmpty()) {
+        if (!nome.isEmpty()) {
+            Optional<CategoriaEntity> categoriaEntity = categoriaRepository.findByNome(nome);
             return modelMapper.map(categoriaEntity, Categoria.class);
         }
         return null;
@@ -52,7 +52,9 @@ public class CategoriaService {
     }
 
     public void excluirCategoria(Long id) {
-        categoriaRepository.deleteById(id);
+        if (id != null) {
+            categoriaRepository.deleteById(id);
+        }
     }
 
 }

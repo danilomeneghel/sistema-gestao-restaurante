@@ -66,7 +66,7 @@ public class FornecedorController {
 
         Fornecedor fornec = fornecedorService.findFornecedorByNome(fornecedor.getNome());
 
-        if (fornec != null) {
+        if (fornec.getNome() != null) {
             customMessage.add("Nome do Fornecedor já cadastrado.");
             mv.addObject("erroFornecedor", true);
             erro = true;
@@ -200,8 +200,7 @@ public class FornecedorController {
 
     @GetMapping("/excluir/{id}")
     public ModelAndView excluirFornecedor(@PathVariable Long id, RedirectAttributes ra) {
-        Fornecedor fornecedor = fornecedorService.findFornecedorById(id);
-        if (fornecedor != null) {
+        if (fornecedorService.findFornecedorById(id) != null) {
             fornecedorService.excluirFornecedorById(id);
             ra.addFlashAttribute("sucesso", "O Fornecedor foi excluído com sucesso.");
         } else {

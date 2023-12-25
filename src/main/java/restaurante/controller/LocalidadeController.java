@@ -14,7 +14,6 @@ import restaurante.model.Bairro;
 import restaurante.model.Estado;
 import restaurante.model.Municipio;
 import restaurante.service.LocalidadeService;
-import restaurante.service.PedidoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +24,6 @@ public class LocalidadeController {
 
     @Autowired
     private LocalidadeService localidadeService;
-
-    @Autowired
-    private PedidoService pedidoService;
 
     @GetMapping("/estados")
     public ModelAndView mostrarEstados() {

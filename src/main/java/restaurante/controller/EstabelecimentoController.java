@@ -66,7 +66,7 @@ public class EstabelecimentoController {
 
         Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNome(estabelecimento.getNome());
 
-        if (estab != null) {
+        if (estab.getNome() != null) {
             customMessage.add("Nome do Estabelecimento já cadastrado.");
             mv.addObject("erroEstabelecimento", true);
             erro = true;
@@ -200,8 +200,7 @@ public class EstabelecimentoController {
 
     @GetMapping("/excluir/{id}")
     public ModelAndView excluirEstabelecimento(@PathVariable Long id, RedirectAttributes ra) {
-        Estabelecimento estabelecimento = estabelecimentoService.findEstabelecimentoById(id);
-        if (estabelecimento != null) {
+        if (estabelecimentoService.findEstabelecimentoById(id) != null) {
             estabelecimentoService.excluirEstabelecimentoById(id);
             ra.addFlashAttribute("sucesso", "O Estabelecimento foi excluído com sucesso.");
         } else {

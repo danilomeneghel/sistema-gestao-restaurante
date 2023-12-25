@@ -15,9 +15,16 @@ public class PerfilController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/usuario/{username}")
+    @GetMapping("/{username}")
     public ModelAndView perfil(@PathVariable String username) {
         ModelAndView mv = new ModelAndView("usuario/perfil");
+        mv.addObject("usuario", usuarioService.findUsuarioByUsername(username));
+        return mv;
+    }
+
+    @GetMapping("/usuario/{username}")
+    public ModelAndView perfilUsuario(@PathVariable String username) {
+        ModelAndView mv = new ModelAndView("usuario/perfilUsuario");
         mv.addObject("usuario", usuarioService.findUsuarioByUsername(username));
         return mv;
     }

@@ -25,32 +25,32 @@ public class FornecedorService {
     }
 
     public Fornecedor findFornecedorById(Long id) {
-        Optional<FornecedorEntity> fornecedor = fornecedorRepository.findById(id);
-        if (!fornecedor.isEmpty()) {
-            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (id != null) {
+            FornecedorEntity fornecedor = fornecedorRepository.findById(id).orElse(new FornecedorEntity());
+            return modelMapper.map(fornecedor, Fornecedor.class);
         }
         return null;
     }
 
     public Fornecedor findFornecedorByNome(String nome) {
-        Optional<FornecedorEntity> fornecedor = fornecedorRepository.findByNome(nome);
-        if (!fornecedor.isEmpty()) {
-            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (!nome.isEmpty()) {
+            FornecedorEntity fornecedor = fornecedorRepository.findByNome(nome).orElse(new FornecedorEntity());
+            return modelMapper.map(fornecedor, Fornecedor.class);
         }
         return null;
     }
 
     public Fornecedor findFornecedorByNomeIdNot(String nome, Long id) {
-        Optional<FornecedorEntity> fornecedor = fornecedorRepository.findByNomeAndIdNot(nome, id);
-        if (!fornecedor.isEmpty()) {
-            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (!nome.isEmpty() && id != null) {
+            FornecedorEntity fornecedor = fornecedorRepository.findByNomeAndIdNot(nome, id).orElse(new FornecedorEntity());
+            return modelMapper.map(fornecedor, Fornecedor.class);
         }
         return null;
     }
 
     public List<Fornecedor> findFornecedorByNomeIgnoreCase(String nome) {
-        List<FornecedorEntity> fornecedores = fornecedorRepository.findByNomeContainingIgnoreCase(nome);
-        return fornecedores.stream().map(entity -> modelMapper.map(entity, Fornecedor.class)).collect(Collectors.toList());
+        List<FornecedorEntity> fornecedors = fornecedorRepository.findByNomeContainingIgnoreCase(nome);
+        return fornecedors.stream().map(entity -> modelMapper.map(entity, Fornecedor.class)).collect(Collectors.toList());
     }
 
     public Fornecedor salvarFornecedor(Fornecedor fornecedor) {
@@ -60,12 +60,17 @@ public class FornecedorService {
     }
 
     public void excluirFornecedorById(Long id) {
-        fornecedorRepository.deleteById(id);
+        if (id != null) {
+            fornecedorRepository.deleteById(id);
+        }
     }
 
     public boolean emailExistente(String email) {
-        Optional<FornecedorEntity> fornecedor = fornecedorRepository.findByEmail(email);
-        return !fornecedor.isEmpty();
+        if (!email.isEmpty()) {
+            Optional<FornecedorEntity> fornecedor = fornecedorRepository.findByEmail(email);
+            return !fornecedor.isEmpty();
+        }
+        return false;
     }
 
 }

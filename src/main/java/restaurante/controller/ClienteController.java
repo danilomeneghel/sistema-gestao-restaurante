@@ -66,7 +66,7 @@ public class ClienteController {
 
         Cliente estab = clienteService.findClienteByNome(cliente.getNome());
 
-        if (estab != null) {
+        if (estab.getNome() != null) {
             customMessage.add("Nome do Cliente já cadastrado.");
             mv.addObject("erroCliente", true);
             erro = true;
@@ -200,8 +200,7 @@ public class ClienteController {
 
     @GetMapping("/excluir/{id}")
     public ModelAndView excluirCliente(@PathVariable Long id, RedirectAttributes ra) {
-        Cliente cliente = clienteService.findClienteById(id);
-        if (cliente != null) {
+        if (clienteService.findClienteById(id) != null) {
             clienteService.excluirClienteById(id);
             ra.addFlashAttribute("sucesso", "O Cliente foi excluído com sucesso.");
         } else {

@@ -40,8 +40,11 @@ public class LocalidadeService {
     }
 
     public Estado findEstadoById(Long id) {
-        EstadoEntity estado = estRep.findById(id).get();
-        return modelMapper.map(estado, Estado.class);
+        if (id != null) {
+            EstadoEntity estado = estRep.findById(id).orElse(new EstadoEntity());
+            return modelMapper.map(estado, Estado.class);
+        }
+        return null;
     }
 
     public List<Estado> findEstadoByNome(String nome) {
@@ -53,7 +56,7 @@ public class LocalidadeService {
         Estado estadoEscolhido = null;
         List<Estado> estados = findAllEstados();
         for (Estado estado : estados) {
-            if(estado.getId() == municipio.getEstado().getId()) {
+            if (estado.getId() == municipio.getEstado().getId()) {
                 estadoEscolhido = estado;
             }
         }
@@ -67,7 +70,9 @@ public class LocalidadeService {
     }
 
     public void excluirEstadoById(Long id) {
-        estRep.deleteById(id);
+        if (id != null) {
+            estRep.deleteById(id);
+        }
     }
 
     public List<Municipio> findAllMunicipios() {
@@ -76,8 +81,11 @@ public class LocalidadeService {
     }
 
     public Municipio findMunicipioById(Long id) {
-        MunicipioEntity municipio = munRep.findById(id).get();
-        return modelMapper.map(municipio, Municipio.class);
+        if (id != null) {
+            MunicipioEntity municipio = munRep.findById(id).orElse(new MunicipioEntity());
+            return modelMapper.map(municipio, Municipio.class);
+        }
+        return null;
     }
 
     public List<Municipio> findMunicipioByNome(String nome) {
@@ -88,8 +96,8 @@ public class LocalidadeService {
     public Municipio findMunicipioByBairro(Bairro bairro) {
         Municipio municipioEscolhido = null;
         List<Municipio> municipios = findAllMunicipios();
-        for(Municipio municipio : municipios) {
-            if(municipio.getId() == bairro.getMunicipio().getId()) {
+        for (Municipio municipio : municipios) {
+            if (municipio.getId() == bairro.getMunicipio().getId()) {
                 municipioEscolhido = municipio;
             }
         }
@@ -103,7 +111,9 @@ public class LocalidadeService {
     }
 
     public void excluirMunicipioById(Long id) {
-        munRep.deleteById(id);
+        if (id != null) {
+            munRep.deleteById(id);
+        }
     }
 
     public List<Bairro> findAllBairros() {
@@ -112,8 +122,11 @@ public class LocalidadeService {
     }
 
     public Bairro findBairroById(Long id) {
-        BairroEntity bairro = baiRep.findById(id).get();
-        return modelMapper.map(bairro, Bairro.class);
+        if (id != null) {
+            BairroEntity bairro = baiRep.findById(id).orElse(new BairroEntity());
+            return modelMapper.map(bairro, Bairro.class);
+        }
+        return null;
     }
 
     public List<Bairro> findBairroByNome(String nome) {
@@ -128,7 +141,9 @@ public class LocalidadeService {
     }
 
     public void excluirBairroById(Long id) {
-        baiRep.deleteById(id);
+        if (id != null) {
+            baiRep.deleteById(id);
+        }
     }
 
     public List<Municipio> findMunicipioPerEstado(Long idEstado) {

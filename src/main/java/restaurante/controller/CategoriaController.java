@@ -66,8 +66,7 @@ public class CategoriaController {
 
     @GetMapping("/excluir/{id}")
     public ModelAndView excluirCategoria(@PathVariable Long id, RedirectAttributes ra) {
-        Categoria categoria = categoriaService.findCategoriaById(id);
-        if (categoria != null) {
+        if (categoriaService.findCategoriaById(id) != null) {
             categoriaService.excluirCategoria(id);
             ra.addFlashAttribute("sucesso", "A Categoria foi excluída com sucesso.");
         } else {
