@@ -148,7 +148,7 @@ public class FornecedorController {
 
         Fornecedor fornec = fornecedorService.findFornecedorByNomeIdNot(fornecedor.getNome(), fornecedor.getId());
 
-        if (fornec != null) {
+        if (fornec.getNome() != null) {
             customMessage.add("Nome do Fornecedor já cadastrado.");
             mv.addObject("erroFornecedor", true);
             erro = true;

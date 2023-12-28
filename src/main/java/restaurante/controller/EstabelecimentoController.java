@@ -148,7 +148,7 @@ public class EstabelecimentoController {
 
         Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNomeIdNot(estabelecimento.getNome(), estabelecimento.getId());
 
-        if (estab != null) {
+        if (estab.getNome() != null) {
             customMessage.add("Nome do Estabelecimento já cadastrado.");
             mv.addObject("erroEstabelecimento", true);
             erro = true;
